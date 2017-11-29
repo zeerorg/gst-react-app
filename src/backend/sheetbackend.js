@@ -1,5 +1,9 @@
 import BackendBase from './base';
+import SheetHelper from "../helper/sheethelper";
 
+const cSheetHelper = new SheetHelper();
+
+/* Singleton */
 export default class SheetsBackend {
     static instance;
 
@@ -14,9 +18,14 @@ export default class SheetsBackend {
 
     /* returns Promise < List<Sheet> > */
     getAllSheets() {
+        let sheets = [];
         return new Promise((resolve, reject) => {
-            this.database.ref("sheets").once('value').then((snapshot) => {
-                resolve(snapshot.toJSON());
+            this.database.ref("sheet-data").once('value').then((snapshot) => {
+                snapshot.forEach(value => {
+                    sheets.push(cSheetHelper.toSheet(value.key, value.val()));
+                });
+                resolve(sheets[0]);
+                console.log(sheets);
             }).catch(err => {
                 resolve({data: err});
             })

@@ -2,6 +2,7 @@
 
 export default class Sheet {
     
+    /* @entries: List<Entry> */
     constructor(id, title, details, entries) {
         this.id = id;
         this.title = title;
@@ -9,7 +10,7 @@ export default class Sheet {
         this.entries = entries;
     }
 
-    createFromJSON(data) {
-        return new Sheet(/*TODO: Fill in parameters */);
+    createFromEntry(data) {
+        return new Sheet(data);
     }
 }
