@@ -1,13 +1,8 @@
 const firebase = require('firebase');
 
-export default class FirebaseBase {
-    static instance;
+class FirebaseBase {
     
     constructor() {
-        if(this.instance) {
-            return this.instance;
-        }
-
         const config = {
             apiKey: "AIzaSyAHIInGfEwfXMn4hHFn4pBf3tPSysYfuzA",
             authDomain: "gst-data.firebaseapp.com",
@@ -21,6 +16,7 @@ export default class FirebaseBase {
 
         this.firebase = firebase;
         this.database = firebase.database();
-        this.instance = this;
     }
 }
+
+export let firebaseBase = new FirebaseBase();

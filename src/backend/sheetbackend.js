@@ -1,19 +1,13 @@
-import BackendBase from './base';
+import { firebaseBase } from './base';
 import SheetHelper from "../helper/sheethelper";
 
 const cSheetHelper = new SheetHelper();
 
-/* Singleton */
-export default class SheetsBackend {
-    static instance;
+class SheetsBackend {
 
     constructor() {
-        if(this.instance) {
-            return this.instance;
-        }
-        this.backend = new BackendBase();
+        this.backend = firebaseBase;
         this.database = this.backend.database;
-        this.instance = this;
     }
 
     /* returns Promise < List<Sheet> > */
@@ -24,11 +18,12 @@ export default class SheetsBackend {
                 snapshot.forEach(value => {
                     sheets.push(cSheetHelper.toSheet(value.key, value.val()));
                 });
-                resolve(sheets[0]);
-                console.log(sheets);
+                resolve(sheets);
             }).catch(err => {
                 resolve({data: err});
             })
         });
     }
 }
+
+export let sheetsBackend = new SheetsBackend();
