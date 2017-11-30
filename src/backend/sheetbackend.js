@@ -24,6 +24,14 @@ class SheetsBackend {
             })
         });
     }
+
+    /* @returns: Promise<>, after the write is done */
+    addNewSheet(title, details) {
+        return this.database.ref("sheet-data").push({
+            "details": details,
+            "title": title
+        });
+    }
 }
 
 export let sheetsBackend = new SheetsBackend();

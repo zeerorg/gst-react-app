@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { sheetsBackend } from '../../backend/sheetbackend';
+import { withRouter } from 'react-router'
 import TitleInput from './TitleInput';
 import DetailInput from './DetailInput';
 import SubmitButton from './SubmitButton';
@@ -23,7 +24,10 @@ export default class AddSheet extends Component {
   }
 
   handleSubmit(event) {
-    console.log(this.state);
+    this.sheetsData.addNewSheet(this.state.title, this.state.detail).then(() => {
+      const { history } = this.props;
+      history.goBack();
+    });
     event.preventDefault();
   }
 
