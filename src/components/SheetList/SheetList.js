@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import SheetListItem from './SheetListItem';
 import { sheetsBackend } from '../../backend/sheetbackend';
+import SheetListItem from './SheetListItem';
+import LinkButton from '../mini/LinkButton';
 
 export default class SheetList extends Component {
 
@@ -23,10 +23,7 @@ export default class SheetList extends Component {
       <div className="SheetList">
         <h1>
           Sheets &nbsp;&nbsp;&nbsp;
-          <Link to="/sheet/new" className="btn btn-info btn-lg">
-            
-              <span className="glyphicon glyphicon-plus"></span>
-          </Link>
+          <LinkButton btnColor="btn-info" icon="glyphicon-plus" link="/sheet/new" />
         </h1>
         <br/>
         <ul className="list-group">
