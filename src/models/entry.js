@@ -9,7 +9,7 @@ export default class Entry {
         this.type = type;
         this.gst_no = gst_no;
         this.inv_no = inv_no;
-        this.inv_date = inv_date;
+        this.inv_date = new Date(inv_date);
         this.inv_type = inv_type;
         this.inv_val = inv_val;
         this.pos = pos;
@@ -18,6 +18,12 @@ export default class Entry {
         this.igst = igst;
         this.cgst = cgst;
         this.sgst = sgst;
+
+        this.getDate = this.getDate.bind(this);
+    }
+
+    getDate() {
+        return this.inv_date.toString();
     }
 
 }

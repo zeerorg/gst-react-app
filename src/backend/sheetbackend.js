@@ -41,7 +41,7 @@ class SheetsBackend {
                 sheet = cSheetHelper.toSheetWithoutEntries(id, snapshot.val());
                 return this.database.ref("sheet-entries").child(id).once("value");
             }).then((snapshot) => {
-                let entries = snapshot.val();
+                let entries = Object.keys(snapshot.val());
                 if(entries){
                     sheet.entries = entries;
                 }

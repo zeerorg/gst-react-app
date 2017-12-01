@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { sheetsBackend } from '../../backend/sheetbackend';
 // eslint-disable-next-line
 import { withRouter } from 'react-router'
-import Input from './Input';
-import SubmitButton from './SubmitButton';
+import Input from '../mini/Input';
+import SubmitButton from '../mini/SubmitButton';
 
 /* Add sheet */
 /* State has value 'Title', 'Details';  There is a function that will handle on submit events */
 export default class AddSheet extends Component {
-
   constructor() {
     super();
     this.sheetsData = sheetsBackend;

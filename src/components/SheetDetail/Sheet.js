@@ -4,7 +4,7 @@ import EntryListItem from './EntryListItem';
 import Button from './Button';
 import LinkButton from '../mini/LinkButton';
 
-export default class SheetComponent extends Component {
+export default class Sheet extends Component {
 
   constructor(props) {
     super();
@@ -30,13 +30,32 @@ export default class SheetComponent extends Component {
           <Button btnColor="btn-warning" icon="glyphicon-edit" />
         </h1>
         <p>{sheet.details}</p>
-        <ul className="list-group">
-        { 
-          sheet.entries.map(entry_id => (
-            <EntryListItem entry_id={entry_id} sheet_id={sheet.id} key={entry_id} />
-          ))
-        }
-        </ul>
+        <table className="table table-bordered">
+          <thead>
+            <tr>
+              <th>SNo</th>
+              <th>Type</th>
+              <th>GST No</th>
+              <th>Inv No</th>
+              <th>Inv Date</th>
+              <th>Inv Type</th>
+              <th>POS</th>
+              <th>Inv val</th>
+              <th>Taxable val</th>
+              <th>Rate</th>
+              <th>IGST</th>
+              <th>CGST</th>
+              <th>SGST</th>
+            </tr>
+          </thead>
+          <tbody>
+          { 
+            sheet.entries.map(entry_id => (
+              <EntryListItem entry_id={entry_id} sheet_id={sheet.id} key={entry_id} />
+            ))
+          }
+          </tbody>
+        </table>
       </div>
     )
   }

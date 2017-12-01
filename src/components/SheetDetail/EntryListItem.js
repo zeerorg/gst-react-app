@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { entryBackend } from '../../backend/entrybackend';
 
 export default class EntryListItem extends Component {
@@ -10,20 +10,38 @@ export default class EntryListItem extends Component {
   }
 
   populateEmptyListItem(sheet_id, entry_id) {
-    let link = "/sheet/" + sheet_id + "/entry/" + entry_id;
+    //let link = "/sheet/" + sheet_id + "/entry/" + entry_id;
     return (
-      <Link to={link} className="list-group-item">
-        {entry_id}
-      </Link>
+      // <Link to={link} className="list-group-item">
+      //   {entry_id}
+      // </Link>
+      <tr>
+        <td>fetching.....</td>
+      </tr>
     )
   }
 
   populateListItem(entry) {
-    let link = "/sheet/" + entry.sheet_id + "/entry/" + entry.id;
+    //let link = "/sheet/" + entry.sheet_id + "/entry/" + entry.id;
     return (
-      <Link to={link} className="list-group-item">
-        {entry.gst_no} : &nbsp; {entry.inv_date.toString()}
-      </Link>
+      // <Link to={link} className="list-group-item">
+      //   {entry.gst_no} : &nbsp; {entry.inv_date.toString()}
+      // </Link>
+      <tr>
+        <td>{entry.sr_no}</td>
+        <td>{entry.type}</td>
+        <td>{entry.gst_no}</td>
+        <td>{entry.inv_no}</td>
+        <td>{entry.inv_date.toString()}</td>
+        <td>{entry.inv_type}</td>
+        <td>{entry.pos}</td>
+        <td>{entry.inv_val}</td>
+        <td>{entry.taxable_val}</td>
+        <td>{entry.rate}</td>
+        <td>{entry.igst}</td>
+        <td>{entry.cgst}</td>
+        <td>{entry.sgst}</td>
+      </tr>
     )
   }
 
