@@ -18,7 +18,7 @@ export default class SheetHelper {
     }
 
     /* returns Sheet object */
-    toSheet(key, data) {
+    toSheetWithoutEntries(key, data) {
         return new Sheet(key, data.title, data.details, [])
     }    
 }

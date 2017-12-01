@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import { sheetsBackend } from '../backend/sheetbackend';
+import { Link } from 'react-router-dom';
+import SheetListItem from './SheetListItem';
+import { sheetsBackend } from '../../backend/sheetbackend';
 
 export default class SheetList extends Component {
 
@@ -12,7 +13,7 @@ export default class SheetList extends Component {
   loadingPage() {
     return (
       <div className="SheetList">
-        <h1> Hello </h1>
+        <div className="loader"></div>
       </div>
     )
   }
@@ -25,14 +26,13 @@ export default class SheetList extends Component {
           <Link to="/sheet/new" className="btn btn-info btn-lg">
             
               <span className="glyphicon glyphicon-plus"></span>
-            
           </Link>
         </h1>
         <br/>
         <ul className="list-group">
         { 
           sheets.map(sheet => (
-            <li className="list-group-item" key={sheet.id}>{sheet.title}</li>
+            <SheetListItem sheet={sheet} key={sheet.id} />
           )) 
         }
         </ul>

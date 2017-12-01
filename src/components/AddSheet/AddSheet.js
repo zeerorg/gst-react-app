@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { sheetsBackend } from '../../backend/sheetbackend';
+// eslint-disable-next-line
 import { withRouter } from 'react-router'
-import TitleInput from './TitleInput';
-import DetailInput from './DetailInput';
+import Input from './Input';
 import SubmitButton from './SubmitButton';
 
 /* Add sheet */
@@ -24,10 +24,8 @@ export default class AddSheet extends Component {
   }
 
   handleSubmit(event) {
-    this.sheetsData.addNewSheet(this.state.title, this.state.detail).then(() => {
-      const { history } = this.props;
-      history.goBack();
-    });
+    this.props.history.goBack();
+    this.sheetsData.addNewSheet(this.state.title, this.state.detail);
     event.preventDefault();
   }
 
@@ -45,9 +43,9 @@ export default class AddSheet extends Component {
         <h1> Add new Sheet </h1>
         <form className="form-horizontal" onSubmit={this.handleSubmit}>
           <br />
-          <TitleInput value={this.state.title} onChange={this.handleTitleChange} />
+          <Input value={this.state.title} onChange={this.handleTitleChange} usage="Title" />
           <br />
-          <DetailInput value={this.state.detail} onChange={this.handleDetailChange}/>
+          <Input value={this.state.detail} onChange={this.handleDetailChange} usage="Details"/>
           <br />
           <SubmitButton />
         </form>

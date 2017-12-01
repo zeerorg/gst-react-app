@@ -16,7 +16,7 @@ class SheetsBackend {
         return new Promise((resolve, reject) => {
             this.database.ref("sheet-data").once('value').then((snapshot) => {
                 snapshot.forEach(value => {
-                    sheets.push(cSheetHelper.toSheet(value.key, value.val()));
+                    sheets.push(cSheetHelper.toSheetWithoutEntries(value.key, value.val()));
                 });
                 resolve(sheets);
             }).catch(err => {
@@ -30,6 +30,25 @@ class SheetsBackend {
         return this.database.ref("sheet-data").push({
             "details": details,
             "title": title
+        });
+    }
+
+    /* returns Promise<Sheet> with all entries id */
+    getSheetDetail(id) {
+        return new Promise((resolve, reject) => {
+            let sheet;
+            this.database.ref("sheet-data").child(id).once("value").then((snapshot) => {
+                sheet = cSheetHelper.toSheetWithoutEntries(id, snapshot.val());
+                return this.database.ref("sheet-entries").child(id).once("value");
+            }).then((snapshot) => {
+                let entries = snapshot.val();
+                if(entries){
+                    sheet.entries = entries;
+                }
+                resolve(sheet);
+            }).catch((err) => {
+                reject(err);
+            });
         });
     }
 }

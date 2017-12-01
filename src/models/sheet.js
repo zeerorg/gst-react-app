@@ -2,7 +2,7 @@
 
 export default class Sheet {
     
-    /* @entries: List<Entry> */
+    /* @entries: List<string> contains id of all entries */
     constructor(id, title, details, entries) {
         this.id = id;
         this.title = title;
