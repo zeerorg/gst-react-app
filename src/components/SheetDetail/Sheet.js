@@ -20,11 +20,12 @@ export default class SheetComponent extends Component {
   }
 
   populatedComponent(sheet) {
+    let link = "/sheet/" + sheet.id + "/entry/new";
     return (
       <div className="Sheet">
         <h1>
           {sheet.title}
-          <LinkButton btnColor="btn-info" icon="glyphicon-plus" link="/entry/new" />
+          <LinkButton btnColor="btn-info" icon="glyphicon-plus" link={link} />
           <Button btnColor="btn-danger" icon="glyphicon-remove" />
           <Button btnColor="btn-warning" icon="glyphicon-edit" />
         </h1>
@@ -32,7 +33,7 @@ export default class SheetComponent extends Component {
         <ul className="list-group">
         { 
           sheet.entries.map(entry_id => (
-            <EntryListItem entry_id={entry_id} key={entry_id} />
+            <EntryListItem entry_id={entry_id} sheet_id={sheet.id} key={entry_id} />
           ))
         }
         </ul>
