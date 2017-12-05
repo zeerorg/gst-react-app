@@ -18,7 +18,7 @@ class SheetsBackend {
             this.database.collection("sheet").get().then((querySnapshot) => {
                 let sheets = []
                 querySnapshot.forEach((docSnapshot) => {
-                    sheets.push(docSnapshot.data());
+                    sheets.push(cSheetHelper.toSheetWithoutEntries(docSnapshot.id, docSnapshot.data()));
                 })
                 resolve(sheets);
             }).catch((err) => {
@@ -56,14 +56,14 @@ class SheetsBackend {
                 sheet = cSheetHelper.toSheetWithoutEntries(id, docSnapshot.data());
                 return this.database.collection("entry").where("sheet_id", "==", id).get();
             }).then((querySnapshot) => {
-                if(!querySnapshot.empty()) {
+                if(!querySnapshot.empty) {
                     let entries = [];
                     querySnapshot.forEach((docSnapshot) => {
                         entries.push(docSnapshot.id);
                     });
                     sheet.entries = entries;
-                    resolve(sheet);
                 }
+                resolve(sheet);
             }).catch((err)=>{
                 reject(err);
             });

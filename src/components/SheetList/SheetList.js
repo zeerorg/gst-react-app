@@ -18,7 +18,11 @@ export default class SheetList extends Component {
     )
   }
 
-  sheetList(/* List <Sheet> */sheets) {
+  /**
+   * 
+   * @param {Array<Sheet>} sheets 
+   */
+  sheetList(sheets) {
     return (
       <div className="SheetList">
         <h1>
