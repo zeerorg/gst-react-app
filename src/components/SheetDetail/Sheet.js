@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// eslint-disable-next-line
+import { withRouter } from 'react-router'
 import { sheetsBackend } from '../../backend/sheetbackend';
 import EntryListItem from './EntryListItem';
 import Button from './Button';
@@ -10,6 +12,12 @@ export default class Sheet extends Component {
     super();
     this.id = props.match.params.id;
     this.sheetsData = sheetsBackend;
+    this.deleteSheet = this.deleteSheet.bind(this);
+  }
+
+  deleteSheet() {
+    this.sheetsData.deleteSheet(this.id, this.state.sheet.entries);
+    this.props.history.goBack();
   }
   
   blankComponent() {
@@ -26,7 +34,7 @@ export default class Sheet extends Component {
         <h1>
           {sheet.title}
           <LinkButton btnColor="btn-info" icon="glyphicon-plus" link={link} />
-          <Button btnColor="btn-danger" icon="glyphicon-remove" />
+          <Button btnColor="btn-danger" icon="glyphicon-remove" onClick={this.deleteSheet}/>
           <Button btnColor="btn-warning" icon="glyphicon-edit" />
         </h1>
         <p>{sheet.details}</p>

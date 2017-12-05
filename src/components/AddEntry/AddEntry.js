@@ -65,11 +65,11 @@ export default class AddEntry extends Component {
       handleDateChange(event) {
           this.setState({date: event.target.value});
       }
-    
+
       render() {
         return (
           <div className="AddSheet">
-            <h1> Add new Sheet </h1>
+            <h1> Add new Entry </h1>
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
               <Input value={this.state.sr_no} onChange={this.handleSerialChange} usage="Serial Number" />
               <br />

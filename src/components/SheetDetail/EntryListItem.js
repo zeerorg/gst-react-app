@@ -1,38 +1,44 @@
 import React, { Component } from 'react';
-//import { Link } from 'react-router-dom';
+// eslint-disable-next-line
+import Entry from '../../models/entry';
 import { entryBackend } from '../../backend/entrybackend';
 
 export default class EntryListItem extends Component {
   constructor(props) {
     super();
+
+    /** @type {string} */
     this.entry_id = props.entry_id;
+
+    /** @type {string} */
     this.sheet_id = props.sheet_id;
   }
 
+  /**
+   * Display loading element while entries are being fetched.
+   * @param {string} sheet_id 
+   * @param {string} entry_id 
+   */
   populateEmptyListItem(sheet_id, entry_id) {
-    //let link = "/sheet/" + sheet_id + "/entry/" + entry_id;
     return (
-      // <Link to={link} className="list-group-item">
-      //   {entry_id}
-      // </Link>
       <tr>
         <td>fetching.....</td>
       </tr>
     )
   }
 
+  /**
+   * Display the table entry
+   * @param {Entry} entry - The Sheet object to be displayed
+   */
   populateListItem(entry) {
-    //let link = "/sheet/" + entry.sheet_id + "/entry/" + entry.id;
     return (
-      // <Link to={link} className="list-group-item">
-      //   {entry.gst_no} : &nbsp; {entry.inv_date.toString()}
-      // </Link>
       <tr>
         <td>{entry.sr_no}</td>
         <td>{entry.type}</td>
         <td>{entry.gst_no}</td>
         <td>{entry.inv_no}</td>
-        <td>{entry.inv_date.toString()}</td>
+        <td>{entry.getDate()}</td>
         <td>{entry.inv_type}</td>
         <td>{entry.pos}</td>
         <td>{entry.inv_val}</td>

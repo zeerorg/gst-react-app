@@ -1,16 +1,19 @@
-/* Model for a sheet. Contains a list of entries */
-
-export default class Sheet {
+/** Model for a sheet. Contains a list of entries */
+class Sheet {
     
-    /* @entries: List<string> contains id of all entries */
+    /**
+     * Create a sheet
+     * @param {string} id - Firebase ID of sheet
+     * @param {string} title - Title of sheet
+     * @param {string} details - Details of sheet
+     * @param {Array<string>} entries - ID of entries in a sheet
+     */
     constructor(id, title, details, entries) {
         this.id = id;
         this.title = title;
         this.details = details;
         this.entries = entries;
     }
-
-    createFromEntry(data) {
-        return new Sheet(data);
-    }
 }
+
+export default Sheet;

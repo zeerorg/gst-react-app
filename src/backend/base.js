@@ -1,4 +1,5 @@
 const firebase = require('firebase');
+require("firebase/firestore");
 
 class FirebaseBase {
     
@@ -15,8 +16,11 @@ class FirebaseBase {
         firebase.initializeApp(config);
 
         this.firebase = firebase;
-        this.database = firebase.database();
+        this.database = firebase.firestore();
     }
 }
 
+/**
+ * @static
+ */
 export let firebaseBase = new FirebaseBase();

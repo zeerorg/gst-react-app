@@ -5,13 +5,13 @@ import { withRouter } from 'react-router'
 import Input from '../mini/Input';
 import SubmitButton from '../mini/SubmitButton';
 
-/* Add sheet */
-/* State has value 'Title', 'Details';  There is a function that will handle on submit events */
+/** Add sheet */
 export default class AddSheet extends Component {
   constructor() {
     super();
     this.sheetsData = sheetsBackend;
 
+    /** State has value 'Title', 'Details';  There is a function that will handle on submit events */
     this.state = {
       title: '',
       detail: ''
