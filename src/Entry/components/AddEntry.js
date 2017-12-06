@@ -23,7 +23,7 @@ export default class AddEntry extends Component {
           gst_no: '',
           inv_no: '',
           pos: 'Delhi',
-          inv_val: 0,
+          tax_val: 0,
           date: moment()
         }
 
@@ -32,13 +32,13 @@ export default class AddEntry extends Component {
         this.handleSerialChange = this.handleSerialChange.bind(this);
         this.handleInvNoChange = this.handleInvNoChange.bind(this);
         this.handlePosChange = this.handlePosChange.bind(this);
-        this.handleInvValChange = this.handleInvValChange.bind(this);
+        this.handleTaxValChange = this.handleTaxValChange.bind(this);
         this.handleGstChange = this.handleGstChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
       }
     
       handleSubmit(event) {
-        let entry = this.entryHelper.toEntryfromMinimal(this.sheet_id, this.state.sr_no, this.state.gst_no, this.state.inv_no, this.state.pos, this.state.inv_val, this.state.date.toDate());
+        let entry = this.entryHelper.toEntryfromMinimal(this.sheet_id, this.state.sr_no, this.state.gst_no, this.state.inv_no, this.state.pos, this.state.tax_val, this.state.date.toDate());
         this.backend.addNewEntry(entry);
         this.props.history.goBack();
         event.preventDefault();
@@ -56,8 +56,8 @@ export default class AddEntry extends Component {
         this.setState({pos: event.target.value});
       }
 
-      handleInvValChange(event) {
-        this.setState({inv_val: event.target.value});
+      handleTaxValChange(event) {
+        this.setState({tax_val: event.target.value});
       }
 
       handleInvNoChange(event) {
@@ -83,7 +83,7 @@ export default class AddEntry extends Component {
               <br />
               <Input value={this.state.pos} onChange={this.handlePosChange} usage="POS"/>
               <br />
-              <NumberInput value={this.state.inv_val} onChange={this.handleInvValChange} usage="Invoice Value" />
+              <NumberInput value={this.state.tax_val} onChange={this.handleTaxValChange} usage="Taxable Value" />
               <br />
               <SubmitButton />
             </form>
