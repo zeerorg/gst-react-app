@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Entry from '../entry_model';
 import { entryBackend } from '../entry_backend';
 
+import SmallLinkButton from '../../global/components/SmallLinkButton';
+
 export default class EntryListItem extends Component {
   constructor(props) {
     super();
@@ -12,6 +14,14 @@ export default class EntryListItem extends Component {
 
     /** @type {string} */
     this.sheet_id = props.sheet_id;
+
+    this.backend = entryBackend;
+    this.deleteEntry = this.deleteEntry.bind(this);
+  }
+
+  deleteEntry(){
+    this.backend.deleteEntry(this.entry_id).then(() => {
+    });
   }
 
   /**
@@ -32,6 +42,7 @@ export default class EntryListItem extends Component {
    * @param {Entry} entry - The Sheet object to be displayed
    */
   populateListItem(entry) {
+    let deleteRedir = "/sheet/" + entry.sheet_id;
     return (
       <tr>
         <td>{entry.sr_no}</td>
@@ -47,13 +58,14 @@ export default class EntryListItem extends Component {
         <td>{entry.igst}</td>
         <td>{entry.cgst}</td>
         <td>{entry.sgst}</td>
+        <td><SmallLinkButton btnColor="btn-danger" icon="glyphicon-remove" onClick={this.deleteEntry} link={deleteRedir}/></td>
       </tr>
     )
   }
 
   componentWillMount() {
     this.setState({status: "fetching"});
-    entryBackend.getEntry(this.entry_id, this.sheet_id).then((entry) => {
+    this.backend.getEntry(this.entry_id, this.sheet_id).then((entry) => {
       this.setState(
         {
           entry: entry,

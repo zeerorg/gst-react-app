@@ -73,7 +73,6 @@ class SheetsBackend {
      * Deletes sheet
      * @param {string} sheet_id - Sheet ID to be deleted
      * @param {Array<string>} entries - List of Entries to be deleted
-     * @returns {Promise}
      */
     deleteSheet(sheet_id, entries) {
         this.database.collection("sheet").doc(sheet_id).delete();

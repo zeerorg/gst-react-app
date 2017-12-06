@@ -59,6 +59,15 @@ class EntryBackend {
             })
         });
     }
+
+    /**
+     * Delete an entry
+     * @param {string} entry_id - ID of entry to be deleted
+     * @returns {Promise<void>}
+     */
+    deleteEntry(entry_id) {
+        return this.database.collection("entry").doc(entry_id).delete();
+    }
 }
 
 export let entryBackend = new EntryBackend();
