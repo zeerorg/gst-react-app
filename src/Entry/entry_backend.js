@@ -1,4 +1,4 @@
-import { firebaseBase } from './base';
+import { firebaseBase } from '../global/base_backend';
 // eslint-disable-next-line
 import Entry from './entry_model';
 import EntryHelper from './entry_helper';
