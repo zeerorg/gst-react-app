@@ -62,8 +62,8 @@ export default class AddEntry extends Component {
         this.setState({inv_no: event.target.value});
       }
 
-      handleDateChange(event) {
-          this.setState({date: event.target.value});
+      handleDateChange(date) {
+          this.setState({date: date});
       }
 
       render() {
