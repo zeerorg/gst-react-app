@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 // eslint-disable-next-line
 import { withRouter } from 'react-router';
 import moment from 'moment';
-import Input from '../mini/Input';
-import NumberInput from '../mini/NumberInput';
-import DateInput from '../mini/DateInput';
-import SubmitButton from '../mini/SubmitButton';
-import { entryBackend } from '../../backend/entrybackend';
-import EntryHelper from '../../helper/entryhelper';
+
+import { entryBackend } from '../entry_backend';
+import EntryHelper from '../entry_helper';
+
+import Input from '../../global/components/Input';
+import NumberInput from '../../global/components/NumberInput';
+import DateInput from '../../global/components/DateInput';
+import SubmitButton from '../../global/components/SubmitButton';
 
 /* To bo entered: serial number, gst number, invoice number, invoice date, pos, invoice value */
 export default class AddEntry extends Component {

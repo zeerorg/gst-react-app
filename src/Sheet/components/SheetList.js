@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { sheetsBackend } from '../../backend/sheetbackend';
+import { sheetsBackend } from '../sheet_backend';
 import SheetListItem from './SheetListItem';
-import LinkButton from '../mini/LinkButton';
+import LinkButton from '../../global/components/LinkButton';
 
 export default class SheetList extends Component {
 

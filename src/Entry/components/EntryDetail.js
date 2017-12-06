@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { entryBackend } from '../../backend/entrybackend';
+import { entryBackend } from '../entry_backend';
 
 export default class EntryDetail extends Component {
 

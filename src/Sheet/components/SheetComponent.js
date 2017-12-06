@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 // eslint-disable-next-line
 import { withRouter } from 'react-router'
-import { sheetsBackend } from '../../backend/sheetbackend';
-import EntryListItem from './EntryListItem';
-import Button from './Button';
-import LinkButton from '../mini/LinkButton';
+import { sheetsBackend } from '../sheet_backend';
+import EntryListItem from '../../Entry/components/EntryListItem';
+import Button from '../../global/components/Button';
+import LinkButton from '../../global/components/LinkButton';
 
-export default class Sheet extends Component {
+export default class SheetComponent extends Component {
 
   constructor(props) {
     super();

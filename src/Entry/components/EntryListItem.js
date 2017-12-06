@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // eslint-disable-next-line
-import Entry from '../../models/entry';
-import { entryBackend } from '../../backend/entrybackend';
+import Entry from '../entry_model';
+import { entryBackend } from '../entry_backend';
 
 export default class EntryListItem extends Component {
   constructor(props) {

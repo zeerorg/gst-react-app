@@ -1,9 +1,7 @@
 import { firebaseBase } from './base';
 // eslint-disable-next-line
-import Entry from '../models/entry';
-import EntryHelper from '../helper/entryhelper';
-// eslint-disable-next-line
-import Sheet from '../models/sheet';
+import Entry from './entry_model';
+import EntryHelper from './entry_helper';
 
 class EntryBackend {
 
@@ -12,16 +10,6 @@ class EntryBackend {
         this.database = this.backend.database;
         this.instance = this;
         this.helper = new EntryHelper();
-    }
-
-    /**
-     * @param {string} sheet_id - Firebase ID of sheet 
-     * @returns {Promise<Array<Entry>>} 
-     */
-    getAllEntries(sheet_id) {
-        return new Promise((resolve, reject) => {
-            resolve(null);
-        });
     }
 
     /**
@@ -64,7 +52,6 @@ class EntryBackend {
                 sgst: entry.sgst,
                 sheet_id: entry.sheet_id
             };
-            //this.database.ref("sheet-entries").child(entry.sheet_id).child(key).set(true);
             this.database.collection("entry").add(data).then((docRef) => {
                 resolve(docRef);
             }).catch((err) => {

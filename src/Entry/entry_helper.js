@@ -1,4 +1,4 @@
-import Entry from "../models/entry";
+import Entry from "./entry_model";
 
 export default class EntryHelper {
 

@@ -1,4 +1,4 @@
-import Sheet from "../models/sheet";
+import Sheet from "./sheet_model";
 
 export default class SheetHelper {
 

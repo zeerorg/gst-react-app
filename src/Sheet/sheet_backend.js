@@ -1,5 +1,5 @@
-import { firebaseBase } from './base';
-import SheetHelper from "../helper/sheethelper";
+import { firebaseBase } from '../global/base_backend';
+import SheetHelper from "./sheet_helper";
 
 const cSheetHelper = new SheetHelper();
 

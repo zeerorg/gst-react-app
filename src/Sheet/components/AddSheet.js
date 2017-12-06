@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { sheetsBackend } from '../../backend/sheetbackend';
+import { sheetsBackend } from '../sheet_backend';
 // eslint-disable-next-line
-import { withRouter } from 'react-router'
-import Input from '../mini/Input';
-import SubmitButton from '../mini/SubmitButton';
+import { withRouter } from 'react-router';
+import Input from '../../global/components/Input';
+import SubmitButton from '../../global/components/SubmitButton';
 
 /** Add sheet */
 export default class AddSheet extends Component {
