@@ -15,7 +15,7 @@ class App extends Component {
           <Route exact path='/' component={SheetList}/>
           <Route exact path='/sheet/new' component={AddSheet}/>
           <Route path='/sheet/:sheetId/entry/new' component={AddEntry} />
-          <Route path='/sheet/:sheetId/entry/:entryId' component={EntryDetail} />
+          <Route path='/entry/:entryId' component={EntryDetail} />
           <Route path='/sheet/:id' component={SheetComponent}/>
         </Switch>
       </BrowserRouter>

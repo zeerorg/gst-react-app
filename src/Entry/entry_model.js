@@ -36,4 +36,24 @@ export default class Entry {
         return dd+'/'+mm+'/'+yyyy;
     }
 
+    getObject() {
+        return {
+            id : this.id,
+            sheet_id : this.sheet_id,
+            sr_no : this.sr_no,
+            type : this.type,
+            gst_no : this.gst_no,
+            inv_no : this.inv_no,
+            inv_date : this.inv_date,
+            inv_type : this.inv_type,
+            inv_val : this.inv_val,
+            pos : this.pos,
+            taxable_val : this.taxable_val,
+            rate : this.rate,
+            igst : this.igst,
+            cgst : this.cgst,
+            sgst : this.sgst
+        }
+    }
+
 }

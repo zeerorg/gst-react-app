@@ -16,12 +16,6 @@ export default class EntryListItem extends Component {
     this.sheet_id = props.sheet_id;
 
     this.backend = entryBackend;
-    this.deleteEntry = this.deleteEntry.bind(this);
-  }
-
-  deleteEntry(){
-    this.backend.deleteEntry(this.entry_id).then(() => {
-    });
   }
 
   /**
@@ -42,7 +36,7 @@ export default class EntryListItem extends Component {
    * @param {Entry} entry - The Sheet object to be displayed
    */
   populateListItem(entry) {
-    let deleteRedir = "/sheet/" + entry.sheet_id;
+    let deleteRedir = "/entry/" + entry.id;
     return (
       <tr>
         <td>{entry.sr_no}</td>
@@ -58,7 +52,7 @@ export default class EntryListItem extends Component {
         <td>{entry.igst}</td>
         <td>{entry.cgst}</td>
         <td>{entry.sgst}</td>
-        <td><SmallLinkButton btnColor="btn-danger" icon="glyphicon-remove" onClick={this.deleteEntry} link={deleteRedir}/></td>
+        <td><SmallLinkButton btnColor="btn-info" icon="glyphicon-pencil" link={deleteRedir}/></td>
       </tr>
     )
   }

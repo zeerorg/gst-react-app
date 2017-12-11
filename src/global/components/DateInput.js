@@ -5,9 +5,16 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export default class DateInput extends React.Component {
     render() {
-      return <DatePicker
+      return (
+        <div className="DatePicker" style={{paddingLeft: "300px"}}>
+        <span>
+            Date: 
+        <DatePicker
           selected={this.props.value}
           onChange={this.props.onChange}
-      />;
+        />
+        </span>
+        </div>
+        );
     }
 }

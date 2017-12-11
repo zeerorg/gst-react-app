@@ -7,7 +7,6 @@ import { entryBackend } from '../entry_backend';
 import EntryHelper from '../entry_helper';
 
 import Input from '../../global/components/Input';
-import NumberInput from '../../global/components/NumberInput';
 import DateInput from '../../global/components/DateInput';
 import SubmitButton from '../../global/components/SubmitButton';
 
@@ -73,18 +72,12 @@ export default class AddEntry extends Component {
           <div className="AddSheet">
             <h1> Add new Entry </h1>
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
-              <Input value={this.state.sr_no} onChange={this.handleSerialChange} usage="Serial Number" />
-              <br />
-              <Input value={this.state.gst_no} onChange={this.handleGstChange} usage="GST Number" />
-              <br />
-              <DateInput value={this.state.date} onChange={this.handleDateChange} usage="Date" />
-              <br />
-              <Input value={this.state.inv_no} onChange={this.handleInvNoChange} usage="Invoice Number" />
-              <br />
+              <Input value={this.state.sr_no} onChange={this.handleSerialChange} usage="Serial Number" />              
+              <Input value={this.state.gst_no} onChange={this.handleGstChange} usage="GST Number" />             
+              <DateInput value={this.state.date} onChange={this.handleDateChange} usage="Date" />              
+              <Input value={this.state.inv_no} onChange={this.handleInvNoChange} usage="Invoice Number" />              
               <Input value={this.state.pos} onChange={this.handlePosChange} usage="POS"/>
-              <br />
-              <NumberInput value={this.state.tax_val} onChange={this.handleTaxValChange} usage="Taxable Value" />
-              <br />
+              <Input type="number" value={this.state.tax_val} onChange={this.handleTaxValChange} usage="Taxable Value" />
               <SubmitButton />
             </form>
           </div>

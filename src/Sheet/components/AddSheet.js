@@ -41,11 +41,8 @@ export default class AddSheet extends Component {
       <div className="AddSheet">
         <h1> Add new Sheet </h1>
         <form className="form-horizontal" onSubmit={this.handleSubmit}>
-          <br />
           <Input value={this.state.title} onChange={this.handleTitleChange} usage="Title" />
-          <br />
           <Input value={this.state.detail} onChange={this.handleDetailChange} usage="Details"/>
-          <br />
           <SubmitButton />
         </form>
       </div>

@@ -2,7 +2,6 @@ import { firebaseBase } from '../global/base_backend';
 import SheetHelper from "./sheet_helper";
 
 const cSheetHelper = new SheetHelper();
-
 class SheetsBackend {
     constructor() {
         this.backend = firebaseBase;
@@ -31,7 +30,7 @@ class SheetsBackend {
      * Add a new sheet
      * @param {string} title - title of sheet
      * @param {string} details - details of sheet
-     * @returns {Promise} after the write is done
+     * @returns {Promise<DocumentReference>} after the write is done
      */
     addNewSheet(title, details) {
         // return this.database.ref("sheet-data").push({
@@ -73,12 +72,15 @@ class SheetsBackend {
      * Deletes sheet
      * @param {string} sheet_id - Sheet ID to be deleted
      * @param {Array<string>} entries - List of Entries to be deleted
+     * @returns {Promise<void>}
      */
     deleteSheet(sheet_id, entries) {
-        this.database.collection("sheet").doc(sheet_id).delete();
-        entries.forEach((entry_id) => {
-            this.database.collection("entry").doc(entry_id).delete();
-        });
+        let batch = this.database.batch();
+        batch.delete(this.database.collection("sheet").doc(sheet_id));
+        for(let entry_id in entries){
+            batch.delete(this.database.collection("entry").doc(entry_id))
+        }
+        return batch.commit();
     }
 }
 
