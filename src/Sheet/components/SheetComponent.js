@@ -5,6 +5,7 @@ import { sheetsBackend } from '../sheet_backend';
 import EntryListItem from '../../Entry/components/EntryListItem';
 import Button from '../../global/components/Button';
 import LinkButton from '../../global/components/LinkButton';
+import Loader from '../../global/components/Loader/main';
 
 export default class SheetComponent extends Component {
 
@@ -23,6 +24,7 @@ export default class SheetComponent extends Component {
   blankComponent() {
     return (
       <div className="Sheet">
+        <Loader />
       </div>
     )
   }

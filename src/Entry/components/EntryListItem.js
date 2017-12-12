@@ -4,6 +4,7 @@ import Entry from '../entry_model';
 import { entryBackend } from '../entry_backend';
 
 import SmallLinkButton from '../../global/components/SmallLinkButton';
+import Loader from '../../global/components/Loader/main';
 
 export default class EntryListItem extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export default class EntryListItem extends Component {
   populateEmptyListItem(sheet_id, entry_id) {
     return (
       <tr>
-        <td>fetching.....</td>
+        <Loader />
       </tr>
     )
   }

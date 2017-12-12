@@ -72,9 +72,9 @@ export default class AddEntry extends Component {
           <div className="AddSheet">
             <h1> Add new Entry </h1>
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
+              <DateInput value={this.state.date} onChange={this.handleDateChange} usage="Date" />
               <Input value={this.state.sr_no} onChange={this.handleSerialChange} usage="Serial Number" />              
-              <Input value={this.state.gst_no} onChange={this.handleGstChange} usage="GST Number" />             
-              <DateInput value={this.state.date} onChange={this.handleDateChange} usage="Date" />              
+              <Input value={this.state.gst_no} onChange={this.handleGstChange} usage="GST Number" />
               <Input value={this.state.inv_no} onChange={this.handleInvNoChange} usage="Invoice Number" />              
               <Input value={this.state.pos} onChange={this.handlePosChange} usage="POS"/>
               <Input type="number" value={this.state.tax_val} onChange={this.handleTaxValChange} usage="Taxable Value" />

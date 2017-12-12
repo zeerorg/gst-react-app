@@ -8,6 +8,7 @@ import Input from '../../global/components/Input';
 import DateInput from '../../global/components/DateInput';
 import SubmitButton from '../../global/components/SubmitButton';
 import Button from '../../global/components/Button';
+import Loader from '../../global/components/Loader/main';
 
 export default class EntryDetail extends Component {
 
@@ -36,7 +37,7 @@ export default class EntryDetail extends Component {
     loadingData() {
         return  (
             <div className="EntryDetail">
-                <p>{this.state.status}</p>
+                <Loader />
             </div>
         )
     }
