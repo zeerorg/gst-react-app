@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { sheetsBackend } from '../sheet_backend';
 import SheetListItem from './SheetListItem';
 import LinkButton from '../../global/components/LinkButton';
+import Loader from '../../global/components/Loader/main';
 
 export default class SheetList extends Component {
 
@@ -13,7 +14,7 @@ export default class SheetList extends Component {
   loadingPage() {
     return (
       <div className="SheetList">
-        <div className="loader"></div>
+        <Loader />
       </div>
     )
   }

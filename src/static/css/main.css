@@ -1,0 +1,25 @@
+.myobj {
+    width: 5px;
+    height: 5px;
+    background: black;
+    position :absolute;
+    -webkit-animation: mymove 5s infinite; /* Safari 4.0 - 8.0 */
+    animation: mymove 3s infinite;
+    animation-timing-function: linear;
+    border-radius: 50%;
+}
+
+/* Standard syntax */
+@keyframes mymove {
+    0%   {margin-left: 0%;}
+    25%  {margin-left: 40%}
+    75%  {margin-left: 60%;}
+    100% {margin-left: 95%;}
+}
+
+@-webkit-keyframes mymove {
+    0%   {margin-left: 0%;}
+    25%  {margin-left: 40%}
+    75%  {margin-left: 60%;}
+    100% {margin-left: 95%;}
+}
