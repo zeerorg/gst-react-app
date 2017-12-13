@@ -3,7 +3,6 @@ import { sheetsBackend } from '../sheet_backend';
 import SheetListItem from './SheetListItem';
 import LinkButton from '../../global/components/LinkButton';
 import Loader from '../../global/components/Loader/main';
-import Authentication from '../../Auth/auth_middle';
 
 export default class SheetList extends Component {
 

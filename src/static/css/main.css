@@ -1,12 +1,15 @@
 .myobj {
-    width: 5px;
-    height: 5px;
+    width: 8px;
+    height: 8px;
     background: black;
-    position :absolute;
+    position : absolute;
     -webkit-animation: mymove 5s infinite; /* Safari 4.0 - 8.0 */
     animation: mymove 3s infinite;
     animation-timing-function: linear;
     border-radius: 50%;
+    border: 2px solid white;
+    margin-top: 10%;
+    margin-right: 10px;
 }
 
 /* Standard syntax */

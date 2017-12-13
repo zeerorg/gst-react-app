@@ -4,7 +4,6 @@ import { sheetsBackend } from '../sheet_backend';
 import { withRouter } from 'react-router';
 import Input from '../../global/components/Input';
 import SubmitButton from '../../global/components/SubmitButton';
-import Authentication from '../../Auth/auth_middle';
 
 /** Add sheet */
 export default class AddSheet extends Component {
