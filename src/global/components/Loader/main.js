@@ -14,7 +14,7 @@ export default class Loader extends React.Component {
     render() {
         let dots = [];
         for(let x=0; x<this.numDots; x++){
-            dots.push(<DotComponent delay={x} />)
+            dots.push(<DotComponent delay={x} key={x} />)
         }
         return (
             <div>

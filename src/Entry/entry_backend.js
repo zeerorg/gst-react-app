@@ -8,7 +8,6 @@ class EntryBackend {
     constructor() {
         this.backend = firebaseBase;
         this.database = this.backend.database;
-        this.instance = this;
         this.helper = new EntryHelper();
     }
 

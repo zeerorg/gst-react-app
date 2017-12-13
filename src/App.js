@@ -5,10 +5,29 @@ import SheetComponent from './Sheet/components/SheetComponent';
 import AddSheet from './Sheet/components/AddSheet';
 import AddEntry from './Entry/components/AddEntry';
 import EntryDetail from './Entry/components/EntryDetail';
+import Loader from './global/components/Loader/main';
+import Authentication from './Auth/auth_middle';
+import { ANONYMOUS, LOGGED } from './Auth/AuthStore';
 
 class App extends Component {
 
-  render() {
+  constructor() {
+    super();
+
+    this.auth = new Authentication();
+    this.state = this.auth.getState();
+    this.stateUpdater = this.stateUpdater.bind(this);
+  }
+
+  loadingComponent() {
+    return (
+      <div className="App">
+        <Loader />
+      </div>
+    )
+  }
+
+  populateComponent() {
     return (
       <BrowserRouter className="App">
         <Switch>
@@ -20,6 +39,32 @@ class App extends Component {
         </Switch>
       </BrowserRouter>
     )
+  }
+
+  stateUpdater() {
+    if(this.auth.getStatus() === ANONYMOUS) {
+      this.setState({
+        loginStatus: ANONYMOUS
+      });
+    } else if (this.auth.getStatus() === LOGGED) {
+      this.setState(this.auth.getState())
+    }
+  }
+
+  componentDidMount() {
+    this.unsubscribe = this.auth.subscribe(this.stateUpdater);
+    if(this.auth.getStatus() === ANONYMOUS)
+      this.auth.googleSignIn();
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    if(this.state.status !== LOGGED)
+      return this.loadingComponent();
+    return this.populateComponent();
   }
 }
 
