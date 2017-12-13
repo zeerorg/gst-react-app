@@ -3,12 +3,14 @@ import { sheetsBackend } from '../sheet_backend';
 import SheetListItem from './SheetListItem';
 import LinkButton from '../../global/components/LinkButton';
 import Loader from '../../global/components/Loader/main';
+import Authentication from '../../Auth/auth_middle';
 
 export default class SheetList extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.sheetsData = sheetsBackend;
+    this.auth = props.auth;
   }
 
   loadingPage() {
@@ -45,7 +47,7 @@ export default class SheetList extends Component {
   componentWillMount() {
     const data = {data: "fetching"};
     this.setState(data);
-    this.sheetsData.getAllSheets().then(sheets => {
+    this.sheetsData.getAllSheets(this.auth.getUid()).then(sheets => {
       this.setState({data: sheets});
     });
   }

@@ -45,7 +45,11 @@ export default class Authentication {
         return this.store.getState().status;
     }
 
+    /**
+     * Get uid of current user
+     * @returns {string}
+     */
     getUid() {
-        return this.getState().user !== null ? this.getState().user.uid : null;
+        return this.getState().user !== undefined ? this.getState().user.uid : null;
     }
 }

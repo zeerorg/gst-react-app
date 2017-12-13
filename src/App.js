@@ -31,8 +31,8 @@ class App extends Component {
     return (
       <BrowserRouter className="App">
         <Switch>
-          <Route exact path='/' component={SheetList}/>
-          <Route exact path='/sheet/new' component={AddSheet}/>
+          <Route exact path='/' render={(routeProps) => {return <SheetList {...routeProps} {...{auth: this.auth}} />}}/>
+          <Route exact path='/sheet/new' render={(routeProps) => {return <AddSheet {...routeProps} {...{auth: this.auth}} />}}/>
           <Route path='/sheet/:sheetId/entry/new' component={AddEntry} />
           <Route path='/entry/:entryId' component={EntryDetail} />
           <Route path='/sheet/:id' component={SheetComponent}/>

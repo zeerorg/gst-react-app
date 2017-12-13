@@ -27,7 +27,7 @@ export default class EntryListItem extends Component {
   populateEmptyListItem(sheet_id, entry_id) {
     return (
       <tr>
-        <Loader />
+        <td> <Loader /> </td>
       </tr>
     )
   }

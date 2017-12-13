@@ -4,12 +4,14 @@ import { sheetsBackend } from '../sheet_backend';
 import { withRouter } from 'react-router';
 import Input from '../../global/components/Input';
 import SubmitButton from '../../global/components/SubmitButton';
+import Authentication from '../../Auth/auth_middle';
 
 /** Add sheet */
 export default class AddSheet extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.sheetsData = sheetsBackend;
+    this.auth = props.auth;
 
     /** State has value 'Title', 'Details';  There is a function that will handle on submit events */
     this.state = {
@@ -23,8 +25,9 @@ export default class AddSheet extends Component {
   }
 
   handleSubmit(event) {
-    this.props.history.goBack();
-    this.sheetsData.addNewSheet(this.state.title, this.state.detail);
+    this.sheetsData.addNewSheet(this.state.title, this.state.detail, this.auth.getUid()).then(val => {
+      this.props.history.goBack();
+    });
     event.preventDefault();
   }
 

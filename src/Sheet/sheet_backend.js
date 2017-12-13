@@ -10,17 +10,19 @@ class SheetsBackend {
 
     /**
      * Fetches list of all sheets
+     * @param {string} uid - User ID of ssheet owner
      * @returns {Promise<Sheet>} 
      */
-    getAllSheets() {
+    getAllSheets(uid) {
         return new Promise((resolve, reject) => {
-            this.database.collection("sheet").get().then((querySnapshot) => {
+            this.database.collection("sheet").where("uid", "==", uid).get().then((querySnapshot) => {
                 let sheets = []
                 querySnapshot.forEach((docSnapshot) => {
                     sheets.push(cSheetHelper.toSheetWithoutEntries(docSnapshot.id, docSnapshot.data()));
                 })
                 resolve(sheets);
             }).catch((err) => {
+                console.log(err);
                 reject(err);
             })
         });
@@ -30,16 +32,18 @@ class SheetsBackend {
      * Add a new sheet
      * @param {string} title - title of sheet
      * @param {string} details - details of sheet
+     * @param {string} uid - User ID of sheet owner
      * @returns {Promise<DocumentReference>} after the write is done
      */
-    addNewSheet(title, details) {
+    addNewSheet(title, details, uid) {
         // return this.database.ref("sheet-data").push({
         //     "details": details,
         //     "title": title
         // });
         return this.database.collection("sheet").add({
             "title": title,
-            "details": details
+            "details": details,
+            "uid": uid
         });
     }
 
