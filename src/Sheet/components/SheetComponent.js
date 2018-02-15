@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FileSaver from 'file-saver';
 // eslint-disable-next-line
 import { withRouter } from 'react-router'
 import { sheetsBackend } from '../sheet_backend';
@@ -6,6 +7,8 @@ import Button from '../../global/components/Button';
 import LinkButton from '../../global/components/LinkButton';
 import Loader from '../../global/components/Loader/main';
 import EntryList from '../../Entry/components/EntryList';
+
+import { entryBackend } from '../../Entry/entry_backend';
 
 export default class SheetComponent extends Component {
 
@@ -19,6 +22,16 @@ export default class SheetComponent extends Component {
   deleteSheet() {
     this.sheetsData.deleteSheet(this.id, this.state.sheet.entries);
     this.props.history.goBack();
+  }
+
+  async downloadSheet(entries, title) {
+    console.log(entries);
+    let allEntries = await Promise.all(entries.map(entryBackend.getEntry));
+    allEntries.sort((a, b) => Number(a.sr_no) - Number(b.sr_no));
+    let data = allEntries.reduce((acc, curr) => {
+      return `${acc}\n${curr.sr_no},${curr.type},${curr.gst_no},${curr.inv_no},${curr.getDate()},${curr.inv_type},${curr.pos},${curr.inv_val},${curr.taxable_val},${curr.rate},${curr.igst},${curr.cgst},${curr.sgst}`
+    }, "sno,type,gst no,invoice no,invoice date,invoice type,pos,invoice value,taxable value,rate,igst,cgst,sgst");
+    FileSaver.saveAs(new Blob([data], {type: "text/csv;charset=utf-8"}), `${title}.csv`);
   }
   
   blankComponent() {
@@ -38,6 +51,7 @@ export default class SheetComponent extends Component {
           <LinkButton btnColor="btn-info" icon="glyphicon-plus" link={link} />
           <Button btnColor="btn-danger" icon="glyphicon-remove" onClick={this.deleteSheet}/>
           <Button btnColor="btn-warning" icon="glyphicon-edit" />
+          <Button btnColor="btn-success" icon="glyphicon-download" onClick={() => { this.downloadSheet(sheet.entries, sheet.title) }} />
         </h1>
         <p>{sheet.details}</p>
         <table className="table table-bordered">
