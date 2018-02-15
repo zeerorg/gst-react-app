@@ -9,6 +9,8 @@ class EntryBackend {
         this.backend = firebaseBase;
         this.database = this.backend.database;
         this.helper = new EntryHelper();
+
+        this.getEntry = this.getEntry.bind(this);
     }
 
     /**

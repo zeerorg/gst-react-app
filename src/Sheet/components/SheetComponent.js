@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 // eslint-disable-next-line
 import { withRouter } from 'react-router'
 import { sheetsBackend } from '../sheet_backend';
-import EntryListItem from '../../Entry/components/EntryListItem';
 import Button from '../../global/components/Button';
 import LinkButton from '../../global/components/LinkButton';
 import Loader from '../../global/components/Loader/main';
+import EntryList from '../../Entry/components/EntryList';
 
 export default class SheetComponent extends Component {
 
@@ -59,11 +59,7 @@ export default class SheetComponent extends Component {
             </tr>
           </thead>
           <tbody>
-          { 
-            sheet.entries.map(entry_id => (
-              <EntryListItem entry_id={entry_id} sheet_id={sheet.id} key={entry_id} />
-            ))
-          }
+          <EntryList entries={sheet.entries} />
           </tbody>
         </table>
       </div>

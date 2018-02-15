@@ -14,12 +14,21 @@ export default class AuthBackend {
     }
 
     /**
+     * TODO: Add a persistence state
      * Sign In with Google credentials
      * @returns {Promise<any>}
      */
-    googleSignIn() {
-        console.log(this.auth.Persistence);
-        return this.auth.signInWithRedirect(this.provider);
+    googleSignIn = () => {
+        // return new Promise((resolve, reject) => {
+        //     console.log(this);
+        //     this.firebase.auth().setPersistence(
+        //         firebase.auth.Auth.Persistence.LOCAL).then(() => {
+        //         this.auth.signInWithRedirect(this.provider);
+        //     });
+        // });
+        return new Promise((resolve, reject) => {
+            this.auth.signInWithRedirect(this.provider);
+        });
     }
 
     /**

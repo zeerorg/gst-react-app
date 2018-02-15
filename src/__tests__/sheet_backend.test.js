@@ -8,11 +8,11 @@ test('sheet backend test', () => {
     let docId;
     return sheetsBackend.addNewSheet(title, details).then((docReference)=>{
         docId = docReference.id;
-        console.log(docId);
+        
         return sheetsBackend.getSheetDetail(docId);
     }).then((sheet) => {
         expect(sheet).toEqual(new Sheet(docId, title, details, entries));
-        console.log(sheet);
+        
     });
 });
 

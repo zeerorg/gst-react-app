@@ -17,9 +17,9 @@ export default class Loader extends React.Component {
             dots.push(<DotComponent delay={x} key={x} />)
         }
         return (
-            <div>
+            <React.Fragment>
                 {dots}
-            </div>
+            </React.Fragment>
         )
     }
 
