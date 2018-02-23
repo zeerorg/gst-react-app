@@ -1,4 +1,5 @@
 import Entry from "./entry_model";
+import moment from "moment";
 
 export default class EntryHelper {
 
@@ -10,7 +11,7 @@ export default class EntryHelper {
      * @returns {Entry} 
      */
     toEntry(id, sheet_id, data) {
-        return new Entry(id, sheet_id, data.sr_no, data.type, data.gst_no, data.inv_no, data.inv_date, data.inv_type, data.pos, data.inv_val, data.taxable_val, data.rate, data.igst, data.cgst, data.sgst);
+        return new Entry(id, sheet_id, data.sr_no, data.type, data.gst_no, data.inv_no, moment(data.inv_date), data.inv_type, data.pos, data.inv_val, data.taxable_val, data.rate, data.igst, data.cgst, data.sgst);
     }
 
     /**

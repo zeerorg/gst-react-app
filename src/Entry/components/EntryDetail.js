@@ -19,14 +19,15 @@ export default class EntryDetail extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleDateChange = this.handleChange.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
         this.deleteEntry = this.deleteEntry.bind(this);
     }
 
     componentWillMount() {
         this.setState({status: "fetching"});
         this.backend.getEntry(this.entry_id).then((entry) => {
-            entry["date"] = moment(entry["date"])
+            console.log(entry);
+            entry["inv_date"] = moment(entry["inv_date"])
             this.setState({
                 status: "fetched",
                 entry: entry
@@ -57,8 +58,9 @@ export default class EntryDetail extends Component {
     }
 
     handleDateChange(date) {
+        console.log(date);
         let entry = this.state.entry;
-        entry[date] = date;
+        entry["inv_date"] = moment(date);
         this.setState({entry: entry});
     }
 
@@ -79,7 +81,7 @@ export default class EntryDetail extends Component {
                     <Button btnColor="btn-danger" icon="glyphicon-remove" onClick={this.deleteEntry}/>
                 </h1>
                 <form className="form-horizontal" onSubmit={this.handleSubmit}>
-                <DateInput value={this.state.entry.date} onChange={this.handleDateChange} usage="Date" />
+                    <DateInput value={this.state.entry.inv_date.toDate()} onChange={this.handleDateChange} usage="Date" />
                     <Input usage="Serial Number" name="sr_no" value={this.state.entry.sr_no} onChange={this.handleChange} />
                     <Input usage="Type" name="type" value={this.state.entry.type} onChange={this.handleChange} />
                     <Input usage="GST Number" name="gst_no" value={this.state.entry.gst_no} onChange={this.handleChange} />

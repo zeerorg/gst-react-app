@@ -1,20 +1,30 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
+import Input from '../../global/components/Input';
 
-import 'react-datepicker/dist/react-datepicker.css';
+/*global $*/
+/*eslint no-undef: "error"*/
 
 export default class DateInput extends React.Component {
+
     render() {
+      console.log(this.props);
       return (
-        <div className="DatePicker" style={{paddingLeft: "300px"}}>
-        <span>
-            Date: 
-        <DatePicker
-          selected={this.props.value}
-          onChange={this.props.onChange}
+        <Input 
+          usage="Date"
+          name="date"
+          extraClasses="datepicker"
         />
-        </span>
-        </div>
         );
+    }
+
+    componentDidMount() {
+      let { onChange, value } = this.props;
+      $(".datepicker").datepicker({
+        onSelect: function(dateText) {
+          onChange(this.value);
+        },
+        dateFormat: 'dd/mm/yy'
+      });
+      $(".datepicker").datepicker("setDate", value);
     }
 }

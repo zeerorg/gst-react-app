@@ -44,7 +44,7 @@ export default class Entry {
             type : this.type,
             gst_no : this.gst_no,
             inv_no : this.inv_no,
-            inv_date : this.inv_date,
+            inv_date : this.inv_date.toString(),
             inv_type : this.inv_type,
             inv_val : this.inv_val,
             pos : this.pos,
