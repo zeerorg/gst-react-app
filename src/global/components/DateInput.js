@@ -21,7 +21,7 @@ export default class DateInput extends React.Component {
       let { onChange, value } = this.props;
       $(".datepicker").datepicker({
         onSelect: function(dateText) {
-          onChange(this.value);
+          onChange($(".datepicker").datepicker("getDate"));
         },
         dateFormat: 'dd/mm/yy'
       });

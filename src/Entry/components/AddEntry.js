@@ -23,7 +23,7 @@ export default class AddEntry extends Component {
           inv_no: '',
           pos: 'Delhi',
           tax_val: 0,
-          date: moment()
+          inv_date: new moment()
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,7 +37,7 @@ export default class AddEntry extends Component {
       }
     
       handleSubmit(event) {
-        let entry = this.entryHelper.toEntryfromMinimal(this.sheet_id, this.state.sr_no, this.state.gst_no, this.state.inv_no, this.state.pos, this.state.tax_val, this.state.date.toDate());
+        let entry = this.entryHelper.toEntryfromMinimal(this.sheet_id, this.state.sr_no, this.state.gst_no, this.state.inv_no, this.state.pos, this.state.tax_val, this.state.inv_date);
         this.backend.addNewEntry(entry);
         this.props.history.goBack();
         event.preventDefault();
@@ -64,7 +64,8 @@ export default class AddEntry extends Component {
       }
 
       handleDateChange(date) {
-          this.setState({date: date});
+          console.log(date);
+          this.setState({inv_date: moment(date)});
       }
 
       render() {
@@ -72,7 +73,7 @@ export default class AddEntry extends Component {
           <div className="AddSheet">
             <h1> Add new Entry </h1>
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
-              <DateInput value={this.state.date} onChange={this.handleDateChange} usage="Date" />
+              <DateInput value={this.state.inv_date.toDate()} onChange={this.handleDateChange} usage="Date" />
               <Input value={this.state.sr_no} onChange={this.handleSerialChange} usage="Serial Number" />              
               <Input value={this.state.gst_no} onChange={this.handleGstChange} usage="GST Number" />
               <Input value={this.state.inv_no} onChange={this.handleInvNoChange} usage="Invoice Number" />              

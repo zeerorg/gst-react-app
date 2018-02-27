@@ -19,8 +19,8 @@ export default class SheetComponent extends Component {
     this.deleteSheet = this.deleteSheet.bind(this);
   }
 
-  deleteSheet() {
-    this.sheetsData.deleteSheet(this.id, this.state.sheet.entries);
+  async deleteSheet() {
+    await this.sheetsData.deleteSheet(this.id, this.state.sheet.entries);
     this.props.history.goBack();
   }
 
