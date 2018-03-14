@@ -6,7 +6,8 @@ import { sheetsBackend } from '../sheet_backend';
 import Button from '../../global/components/Button';
 import LinkButton from '../../global/components/LinkButton';
 import Loader from '../../global/components/Loader/main';
-import EntryList from '../../Entry/components/EntryList';
+//import EntryList from '../../Entry/components/EntryList';
+import ListItem from '../../Entry/components/ListItemStateless';
 
 import { entryBackend } from '../../Entry/entry_backend';
 
@@ -42,7 +43,7 @@ export default class SheetComponent extends Component {
     )
   }
 
-  populatedComponent(sheet) {
+  populatedComponent(sheet, entries) {
     let link = "/sheet/" + sheet.id + "/entry/new";
     return (
       <div className="Sheet">
@@ -73,7 +74,10 @@ export default class SheetComponent extends Component {
             </tr>
           </thead>
           <tbody>
-          <EntryList entries={sheet.entries} />
+          {/*<EntryList entries={entries} /> */}
+          {
+            entries.map(entry => <ListItem entry={entry} deleteRedir={`/entry/${entry.id}`} key={entry.id} />)
+          }
           </tbody>
         </table>
       </div>
@@ -81,9 +85,17 @@ export default class SheetComponent extends Component {
   }
 
   componentWillMount() {
+    let sheet;
     this.setState({status: "fetching"});
-    sheetsBackend.getSheetDetail(this.id).then((sheet) => {
-      this.setState({sheet: sheet, status: "completed"});
+    sheetsBackend.getSheetDetail(this.id).then((sh) => {
+      sheet = sh;
+      return Promise.all(sheet.entries.map(entryBackend.getEntry))
+    }).then((entries) => {
+      this.setState({
+        sheet: sheet,
+        entries: entries,
+        status: "completed"
+      });
     })
   }
 
@@ -91,6 +103,6 @@ export default class SheetComponent extends Component {
     if(this.state.status === "fetching") {
       return this.blankComponent();
     }
-    return this.populatedComponent(this.state.sheet);
+    return this.populatedComponent(this.state.sheet, this.state.entries);
   }
 }
