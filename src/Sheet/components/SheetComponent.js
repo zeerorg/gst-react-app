@@ -18,6 +18,10 @@ export default class SheetComponent extends Component {
     this.id = props.match.params.id;
     this.sheetsData = sheetsBackend;
     this.deleteSheet = this.deleteSheet.bind(this);
+
+    this.state = {
+      status: "fetching"
+    }
   }
 
   async deleteSheet() {
@@ -76,7 +80,7 @@ export default class SheetComponent extends Component {
           <tbody>
           {/*<EntryList entries={entries} /> */}
           {
-            entries.map(entry => <ListItem entry={entry} deleteRedir={`/entry/${entry.id}`} key={entry.id} />)
+            entries.map(entry => <ListItem entry={entry} editRedirect={`/entry/${entry.id}`} key={entry.id} />)
           }
           </tbody>
         </table>
@@ -84,7 +88,7 @@ export default class SheetComponent extends Component {
     )
   }
 
-  componentWillMount() {
+  componentDidMount() {
     let sheet;
     this.setState({status: "fetching"});
     sheetsBackend.getSheetDetail(this.id).then((sh) => {
@@ -93,7 +97,7 @@ export default class SheetComponent extends Component {
     }).then((entries) => {
       this.setState({
         sheet: sheet,
-        entries: entries,
+        entries: entries.sort((a, b) => a.inv_date>b.inv_date ? 1 : a.inv_date<b.inv_date ? -1 : 0),
         status: "completed"
       });
     })

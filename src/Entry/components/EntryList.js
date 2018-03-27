@@ -35,7 +35,7 @@ export default class EntryList extends Component {
         <Fragment>
           { 
             this.state.entries.map(entry => (
-              <ListItem entry={entry} deleteRedir={"/"} />
+              <ListItem entry={entry} editRedirect={"/"} />
             ))
           }
         </Fragment>

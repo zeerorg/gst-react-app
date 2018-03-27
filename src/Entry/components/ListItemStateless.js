@@ -1,7 +1,10 @@
 import React from 'react';
 import SmallLinkButton from '../../global/components/SmallLinkButton';
-
-const ListItem = ({ entry, deleteRedir }) => {
+/**
+ * Takes an entry and creates a table row from it.
+ * editRedirect :- string, a link to redirect to when edit button is clicked.
+ */
+const ListItem = ({ entry, editRedirect }) => {
   return (
     <tr>
       <td>{entry.sr_no}</td>
@@ -17,7 +20,7 @@ const ListItem = ({ entry, deleteRedir }) => {
       <td>{entry.igst}</td>
       <td>{entry.cgst}</td>
       <td>{entry.sgst}</td>
-      <td><SmallLinkButton btnColor="btn-info" icon="glyphicon-pencil" link={deleteRedir}/></td>
+      <td><SmallLinkButton btnColor="btn-info" icon="glyphicon-pencil" link={editRedirect}/></td>
     </tr>
   )
 }

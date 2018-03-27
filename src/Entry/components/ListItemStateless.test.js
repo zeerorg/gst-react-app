@@ -1,6 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import ListItem from './ListItemStateless';
+import SmallLinkButton from '../../global/components/SmallLinkButton';
 import Entry from '../entry_model';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -29,5 +30,10 @@ describe("ListItem", () => {
   it("tr is always mounted", () => {
     const trs = listItem().find("tr");
     expect(trs.length).toBeGreaterThan(0);
+  });
+  
+  it("Should contain edit element", () => {
+    const wrapper = listItem(); 
+    expect(wrapper.find(SmallLinkButton).length).toBeGreaterThan(0);
   });
 });
