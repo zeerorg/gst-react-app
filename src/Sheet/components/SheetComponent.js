@@ -34,13 +34,14 @@ export default class SheetComponent extends Component {
     this.props.history.goBack();
   }
 
-  async downloadSheet(entries, title) {
+  async downloadSheet(entries, title, total) {
     console.log(entries);
     let allEntries = await Promise.all(entries.map(entryBackend.getEntry));
     allEntries.sort((a, b) => Number(a.sr_no) - Number(b.sr_no));
     let data = allEntries.reduce((acc, curr) => {
       return `${acc}\n${curr.sr_no},${curr.type},${curr.gst_no},${curr.inv_no},${curr.getDate()},${curr.inv_type},${curr.pos},${curr.inv_val},${curr.taxable_val},${curr.rate},${curr.igst},${curr.cgst},${curr.sgst}`
     }, "sno,type,gst no,invoice no,invoice date,invoice type,pos,invoice value,taxable value,rate,igst,cgst,sgst");
+    data = `${data}\ntotal,invoice value,taxable value,igst,cgst,sgst\ntotal,${total.inv_val},${total.taxable_val},${total.igst},${total.cgst},${total.sgst}`;
     FileSaver.saveAs(new Blob([data], {type: "text/csv;charset=utf-8"}), `${title}.csv`);
   }
   
@@ -61,7 +62,7 @@ export default class SheetComponent extends Component {
           <LinkButton btnColor="btn-info" icon="glyphicon-plus" link={link} />
           <Button btnColor="btn-danger" icon="glyphicon-remove" onClick={this.deleteSheet}/>
           <Button btnColor="btn-warning" icon="glyphicon-edit" />
-          <Button btnColor="btn-success" icon="glyphicon-download" onClick={() => { this.downloadSheet(sheet.entries, sheet.title) }} />
+          <Button btnColor="btn-success" icon="glyphicon-download" onClick={() => { this.downloadSheet(sheet.entries, sheet.title, total) }} />
         </h1>
         <p>{sheet.details}</p>
         <table className="table table-bordered">
