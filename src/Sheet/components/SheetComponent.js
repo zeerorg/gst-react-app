@@ -52,7 +52,7 @@ export default class SheetComponent extends Component {
     )
   }
 
-  populatedComponent(sheet, entries) {
+  populatedComponent(sheet, entries, total) {
     let link = "/sheet/" + sheet.id + "/entry/new";
     return (
       <div className="Sheet">
@@ -89,6 +89,28 @@ export default class SheetComponent extends Component {
           }
           </tbody>
         </table>
+        <div>
+          <table className="table table-bordered">
+            <thead>
+              <tr>
+                <th>Total</th>
+                <th>Invoice value</th>
+                <th>Taxable Value</th>
+                <th>SGST</th>
+                <th>CGST</th>
+                <th>IGST</th>
+              </tr>
+            </thead>
+            <tbody>
+              <td></td>
+              <td>{total.inv_val}</td>
+              <td>{total.taxable_val}</td>
+              <td>{total.sgst}</td>
+              <td>{total.cgst}</td>
+              <td>{total.igst}</td>
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }
@@ -99,19 +121,33 @@ export default class SheetComponent extends Component {
     sheetsBackend.getSheetDetail(this.id).then((sh) => {
       sheet = sh;
       return Promise.all(sheet.entries.map(entryBackend.getEntry))
-    }).then((entries) => {
+    }).then(entries => {
       this.setState({
         sheet: sheet,
         entries: entries.sort((a, b) => a.inv_date>b.inv_date ? 1 : a.inv_date<b.inv_date ? -1 : 0),
+        total: entries.reduce((acc, curr) => {
+          acc.inv_val += curr.inv_val;
+          acc.taxable_val += curr.taxable_val;
+          acc.igst += curr.igst;
+          acc.cgst += curr.cgst;
+          acc.sgst += curr.sgst;
+          return acc
+        }, {
+          inv_val: 0,
+          taxable_val: 0,
+          igst: 0,
+          cgst: 0,
+          sgst: 0
+        }),
         status: "completed"
       });
-    })
+    });
   }
 
   render() {
     if(this.state.status === "fetching") {
       return this.blankComponent();
     }
-    return this.populatedComponent(this.state.sheet, this.state.entries);
+    return this.populatedComponent(this.state.sheet, this.state.entries, this.state.total);
   }
 }

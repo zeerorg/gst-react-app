@@ -13,11 +13,11 @@ export default class Entry {
         this.inv_type = inv_type;
         this.inv_val = inv_val;
         this.pos = pos;
-        this.taxable_val = taxable_val;
-        this.rate = rate
-        this.igst = igst;
-        this.cgst = cgst;
-        this.sgst = sgst;
+        this.taxable_val = Number(taxable_val);
+        this.rate = rate;
+        this.igst = Number(igst);
+        this.cgst = Number(cgst);
+        this.sgst = Number(sgst);
 
         this.getDate = this.getDate.bind(this);
     }
