@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 // eslint-disable-next-line
 import { withRouter } from 'react-router';
-import moment from 'moment';
 
 import { entryBackend } from '../entry_backend';
 import EntryHelper from '../entry_helper';

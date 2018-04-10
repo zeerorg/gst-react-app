@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import FileSaver from 'file-saver';
 // eslint-disable-next-line
-import { withRouter } from 'react-router'
-import { sheetsBackend } from '../sheet_backend';
+import { withRouter } from 'react-router';
+
 import Button from '../../global/components/Button';
 import LinkButton from '../../global/components/LinkButton';
 import Loader from '../../global/components/Loader/main';
-//import EntryList from '../../Entry/components/EntryList';
 import ListItem from '../../Entry/components/ListItemStateless';
 
+import { sheetsBackend } from '../sheet_backend';
 import { entryBackend } from '../../Entry/entry_backend';
 
+/**
+ * Takes a sheet id from the url and fetches the sheet from firebase.
+ * This then renders "ListItem" from data which was fetched
+ * TODO: divide this component into smaller components
+ */
 export default class SheetComponent extends Component {
 
   constructor(props) {

@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import { entryBackend } from '../entry_backend';
 import moment from 'moment';
 // eslint-disable-next-line
 import { withRouter } from 'react-router';
 
-import Input from '../../global/components/Input';
 import DateInput from '../../global/components/DateInput';
 import SubmitButton from '../../global/components/SubmitButton';
 import Button from '../../global/components/Button';
 import Loader from '../../global/components/Loader/main';
+import Input from '../../global/components/Input';
 
+import { entryBackend } from '../entry_backend';
+
+/**
+ * Displays the entry details
+ * Entry ID is retrieved from URL 
+ */
 export default class EntryDetail extends Component {
 
     constructor(props) {
