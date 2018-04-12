@@ -11,7 +11,7 @@ export default class Entry {
         this.inv_no = inv_no;
         this.inv_date = new Date(inv_date);
         this.inv_type = inv_type;
-        this.inv_val = inv_val;
+        this.inv_val = Number(inv_val);
         this.pos = pos;
         this.taxable_val = Number(taxable_val);
         this.rate = rate;
