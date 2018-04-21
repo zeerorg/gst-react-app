@@ -10,7 +10,6 @@
     "jquery": "^3.3.1",
     "jsdom": "^11.6.2",
     "moment": "^2.19.3",
-    "nedb": "^1.8.0",
     "react": "^16.2.0",
     "react-datepicker": "^0.61.0",
     "react-dom": "^16.2.0",
@@ -27,5 +26,9 @@
     "deploy": "react-scripts build && firebase deploy",
     "test:nw": "jest",
     "ntest": "CI=true react-scripts test"
+  },
+  "devDependencies": {
+    "dom-testing-library": "^1.8.0",
+    "react-testing-library": "^2.1.1"
   }
 }
