@@ -35,11 +35,13 @@ export default class AddEntry extends Component {
         this.handleGstChange = this.handleGstChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
       }
-    
-      handleSubmit(event) {
+      
+      /**
+       *  TODO: show loading when user clicks the submit button. Also check for any more such submit instances.
+       */
+      handleSubmit = (event) => {
         let entry = this.entryHelper.toEntryfromMinimal(this.sheet_id, this.state.sr_no, this.state.gst_no, this.state.inv_no, this.state.pos, this.state.tax_val, this.state.inv_date);
-        this.backend.addNewEntry(entry);
-        this.props.history.goBack();
+        this.backend.addNewEntry(entry).then(this.props.history.goBack);
         event.preventDefault();
       }
     

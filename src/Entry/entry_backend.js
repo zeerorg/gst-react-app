@@ -1,6 +1,4 @@
 import { firebaseBase } from '../global/base_backend';
-// eslint-disable-next-line
-import Entry from './entry_model';
 import EntryHelper from './entry_helper';
 
 class EntryBackend {
@@ -32,7 +30,7 @@ class EntryBackend {
     /**
      * Add a new entry to the database.
      * @param {Entry} entry - Entry object to be added
-     * @returns {Promise<DocumentReference>}
+     * @returns {Promise<void>}
      */
     addNewEntry(entry) {
         return new Promise((resolve, reject) => {
@@ -53,7 +51,7 @@ class EntryBackend {
                 sheet_id: entry.sheet_id
             };
             this.database.collection("entry").add(data).then((docRef) => {
-                resolve(docRef);
+                resolve();
             }).catch((err) => {
                 reject(err);
             })
@@ -71,6 +69,7 @@ class EntryBackend {
 
     /**
      * @param {Entry} entry
+     * @returns {Promise<void>}
      */
     updateEntry(entry) {
         return this.database.collection("entry").doc(entry.id).set(entry.getObject());

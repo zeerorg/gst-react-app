@@ -11,7 +11,7 @@ class SheetsBackend {
     /**
      * Fetches list of all sheets
      * @param {string} uid - User ID of ssheet owner
-     * @returns {Promise<Sheet>} 
+     * @returns {Promise<Array<Sheet>>}
      */
     getAllSheets(uid) {
         return new Promise((resolve, reject) => {
@@ -33,13 +33,9 @@ class SheetsBackend {
      * @param {string} title - title of sheet
      * @param {string} details - details of sheet
      * @param {string} uid - User ID of sheet owner
-     * @returns {Promise<DocumentReference>} after the write is done
+     * @returns {Promise<void>} after the write is done
      */
     addNewSheet(title, details, uid) {
-        // return this.database.ref("sheet-data").push({
-        //     "details": details,
-        //     "title": title
-        // });
         return this.database.collection("sheet").add({
             "title": title,
             "details": details,
