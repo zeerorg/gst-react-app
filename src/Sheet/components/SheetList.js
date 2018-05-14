@@ -9,7 +9,7 @@ export default class SheetList extends Component {
   constructor(props) {
     super(props);
     this.sheetsData = sheetsBackend;
-    this.auth = props.auth;
+    this.uid = props.uid;
   }
 
   loadingPage() {
@@ -46,7 +46,7 @@ export default class SheetList extends Component {
   componentWillMount() {
     const data = {data: "fetching"};
     this.setState(data);
-    this.sheetsData.getAllSheets(this.auth.getUid()).then(sheets => {
+    this.sheetsData.getAllSheets(this.uid).then(sheets => {
       this.setState({data: sheets});
     });
   }

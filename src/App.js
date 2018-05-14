@@ -9,17 +9,15 @@ import EntryDetail from './Entry/components/EntryDetail';
 import Loader from './global/components/Loader/main';
 import EditSheet from './Sheet/components/EditSheet';
 
-import Authentication from './Auth/auth_middle';
-import { ANONYMOUS, LOGGED } from './Auth/AuthStore';
+import AuthBackend from './Auth/auth_backend';
 
 class App extends Component {
 
   constructor() {
     super();
 
-    this.auth = new Authentication();
-    this.state = this.auth.getState();
-    this.stateUpdater = this.stateUpdater.bind(this);
+    this.auth = new AuthBackend();
+    this.state = { "status": false, "uid": "" }
   }
 
   loadingComponent() {
@@ -34,8 +32,8 @@ class App extends Component {
     return (
       <BrowserRouter className="App">
         <Switch>
-          <Route exact path='/' render={(routeProps) => {return <SheetList {...routeProps} {...{auth: this.auth}} />}}/>
-          <Route exact path='/sheet/new' render={(routeProps) => {return <AddSheet {...routeProps} {...{auth: this.auth}} />}}/>
+          <Route exact path='/' render={(routeProps) => {return <SheetList {...routeProps} {...{uid: this.state.uid}} />}}/>
+          <Route exact path='/sheet/new' render={(routeProps) => {return <AddSheet {...routeProps} {...{uid: this.state.uid}} />}}/>
           <Route path='/sheet/:sheetId/entry/new' component={AddEntry} />
           <Route path='/entry/:entryId' component={EntryDetail} />
           <Route path='/sheet/:id/edit' component={EditSheet} />
@@ -45,28 +43,18 @@ class App extends Component {
     )
   }
 
-  stateUpdater() {
-    if(this.auth.getStatus() === ANONYMOUS) {
-      this.setState({
-        loginStatus: ANONYMOUS
-      });
-    } else if (this.auth.getStatus() === LOGGED) {
-      this.setState(this.auth.getState())
-    }
-  }
-
   componentDidMount() {
-    this.unsubscribe = this.auth.subscribe(this.stateUpdater);
-    if(this.auth.getStatus() === ANONYMOUS)
-      this.auth.googleSignIn();
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
+    this.auth.statusCall(user => {
+      if (!user) {
+        this.auth.googleSignIn();
+      } else {
+        this.setState({ "status": true, "uid": user.uid })
+      }
+    })
   }
 
   render() {
-    if(this.state.status !== LOGGED)
+    if(!this.state.status)
       return this.loadingComponent();
     return this.populateComponent();
   }

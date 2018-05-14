@@ -19,15 +19,12 @@ export default class AuthBackend {
      * @returns {Promise<any>}
      */
     googleSignIn = () => {
-        // return new Promise((resolve, reject) => {
-        //     console.log(this);
-        //     this.firebase.auth().setPersistence(
-        //         firebase.auth.Auth.Persistence.LOCAL).then(() => {
-        //         this.auth.signInWithRedirect(this.provider);
-        //     });
-        // });
         return new Promise((resolve, reject) => {
-            this.auth.signInWithRedirect(this.provider);
+            // wanted to add persistence since this project started, it's now almost 6 months old
+            // took me a freaking 6 months to solve this bug, this night no one can stop me
+            this.firebase.auth().setPersistence(this.firebase.auth.Auth.Persistence.LOCAL).then(() => {
+                this.auth.signInWithRedirect(this.provider);
+            });
         });
     }
 
@@ -44,6 +41,13 @@ export default class AuthBackend {
      */
     getCurrentUser() {
         return this.auth.currentUser;
+    }
+
+    /**
+     * Check user state and pass it to function
+     */
+    statusCall(func) {
+        this.firebase.auth().onAuthStateChanged(func);
     }
 }
 
