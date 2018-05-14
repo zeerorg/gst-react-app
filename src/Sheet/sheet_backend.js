@@ -55,10 +55,10 @@ class SheetsBackend {
     getSheetDetail(id) {
         return new Promise((resolve, reject) => {
             let sheet;
-            this.database.collection("sheet").doc(id).get().then((docSnapshot) => {
+            this.database.collection("sheet").doc(id).get().then(docSnapshot => {
                 sheet = cSheetHelper.toSheetWithoutEntries(id, docSnapshot.data());
                 return this.database.collection("entry").where("sheet_id", "==", id).get();
-            }).then((querySnapshot) => {
+            }).then(querySnapshot => {
                 if(!querySnapshot.empty) {
                     let entries = [];
                     querySnapshot.forEach((docSnapshot) => {
@@ -72,6 +72,7 @@ class SheetsBackend {
             });
         });
     }
+
     /**
      * Deletes sheet
      * @param {string} sheet_id - Sheet ID to be deleted
@@ -81,10 +82,22 @@ class SheetsBackend {
     deleteSheet(sheet_id, entries) {
         let batch = this.database.batch();
         batch.delete(this.database.collection("sheet").doc(sheet_id));
-        for(let entry_id in entries){
+        for (let entry_id in entries) {
             batch.delete(this.database.collection("entry").doc(entry_id))
         }
         return batch.commit();
+    }
+
+    /** 
+     * Update a sheet with new data
+     * @param {string} sheet_id - Id of the sheet to be editted
+     * @param {string} title - title of the sheet
+     * @param {string} details - details of sheet
+     * @returns {Promise<DocumentReference>} after the write is done
+     */
+    editSheet(sheet_id, title, details) {
+        let obj = { "title": title, "details": details }
+        return this.database.collection("sheet").doc(sheet_id).set(obj, { "merge": true })
     }
 }
 

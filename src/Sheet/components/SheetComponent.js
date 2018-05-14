@@ -61,7 +61,8 @@ export default class SheetComponent extends Component {
           {sheet.title}
           <LinkButton btnColor="btn-info" icon="glyphicon-plus" link={link} />
           <Button btnColor="btn-danger" icon="glyphicon-remove" onClick={this.deleteSheet}/>
-          <Button btnColor="btn-warning" icon="glyphicon-edit" />
+          <LinkButton btnColor="btn-warning" icon="glyphicon-edit" link={`/sheet/${sheet.id}/edit`} />
+          {/* <Button btnColor="btn-warning" icon="glyphicon-edit" /> */}
           <Button btnColor="btn-success" icon="glyphicon-download" onClick={() => { this.downloadSheet(sheet.entries, sheet.title, total) }} />
         </h1>
         <p>{sheet.details}</p>
@@ -103,12 +104,14 @@ export default class SheetComponent extends Component {
               </tr>
             </thead>
             <tbody>
-              <td></td>
-              <td>{total.inv_val}</td>
-              <td>{total.taxable_val}</td>
-              <td>{total.sgst}</td>
-              <td>{total.cgst}</td>
-              <td>{total.igst}</td>
+              <tr>
+                <td></td>
+                <td>{total.inv_val}</td>
+                <td>{total.taxable_val}</td>
+                <td>{total.sgst}</td>
+                <td>{total.cgst}</td>
+                <td>{total.igst}</td>
+              </tr>
             </tbody>
           </table>
         </div>
