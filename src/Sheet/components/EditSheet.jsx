@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import AsyncLoad from '../../global/components/AsyncLoad';
 import EditSheetForm from './EditSheetForm';
 
 // eslint-disable-next-line

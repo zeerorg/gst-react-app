@@ -14,7 +14,6 @@ export default class AuthBackend {
     }
 
     /**
-     * TODO: Add a persistence state
      * Sign In with Google credentials
      * @returns {Promise<any>}
      */
