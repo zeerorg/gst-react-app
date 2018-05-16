@@ -10,7 +10,10 @@ import Input from '../../global/components/Input';
 import DateInput from '../../global/components/DateInput';
 import SubmitButton from '../../global/components/SubmitButton';
 
-/* To bo entered: serial number, gst number, invoice number, invoice date, pos, invoice value */
+/**
+ *  To bo entered: serial number, gst number, invoice number, invoice date, pos, invoice value
+ *  TODO: Add cancel button
+ */
 export default class AddEntry extends Component {
     constructor(props) {
         super();
@@ -69,9 +72,12 @@ export default class AddEntry extends Component {
       }
 
       render() {
+        let styleHeading = {
+          "margin-left": "4%"
+        }
         return (
           <div className="AddSheet">
-            <h1> Add new Entry </h1>
+            <h1 style={styleHeading}> Add new Entry </h1>
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
               <DateInput value={this.state.inv_date.toDate()} onChange={this.handleDateChange} usage="Date" />
               <Input value={this.state.sr_no} onChange={this.handleSerialChange} usage="Serial Number" />              
@@ -81,6 +87,7 @@ export default class AddEntry extends Component {
               <Input type="number" value={this.state.tax_val} onChange={this.handleTaxValChange} usage="Taxable Value" />
               <SubmitButton />
             </form>
+            <br/>
           </div>
         )
       }

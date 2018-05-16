@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class SubmitButton extends Component {
-    
-    render() {
-        return (
-            <div className="SubmitButton from-group">
-            <br />
-            <div className="col-sm-offset-2 col-sm-10">
-                <button type="submit" className="btn btn-default">Submit</button>
-            </div>
-            <br />
-            </div>
-        )
+const SubmitButton = (props) => {
+    let style = {
+        "margin-top": "7%",
+        "margin-bottom": "7%"
     }
+    return (
+        <div className="SubmitButton from-group" style={style}>
+            <div className="col-sm-offset-2 col-sm-10">
+                <button type="submit" className="btn btn-default btn-primary btn-block">Submit</button>
+            </div>
+        </div>
+    )
 }
+
+export default SubmitButton;

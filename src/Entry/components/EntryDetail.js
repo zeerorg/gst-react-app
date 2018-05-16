@@ -5,9 +5,9 @@ import { withRouter } from 'react-router';
 
 import DateInput from '../../global/components/DateInput';
 import SubmitButton from '../../global/components/SubmitButton';
-import Button from '../../global/components/Button';
 import Loader from '../../global/components/Loader/main';
 import Input from '../../global/components/Input';
+import DeleteButton from '../../global/components/DeleteButton';
 
 import { entryBackend } from '../entry_backend';
 
@@ -79,12 +79,10 @@ export default class EntryDetail extends Component {
      * @param {Entry} entry
      */
     populateItem(entry) {
+        let styleHeading = { "margin-left": "5%" };
         return (
             <div className="EntryDetail">
-                <h1>
-                    Entry for sheet
-                    <Button btnColor="btn-danger" icon="glyphicon-remove" onClick={this.deleteEntry}/>
-                </h1>
+                <h1 style={styleHeading}>Entry for sheet</h1>
                 <form className="form-horizontal" onSubmit={this.handleSubmit}>
                     <DateInput value={this.state.entry.inv_date.toDate()} onChange={this.handleDateChange} usage="Date" />
                     <Input usage="Serial Number" name="sr_no" value={this.state.entry.sr_no} onChange={this.handleChange} />
@@ -101,6 +99,7 @@ export default class EntryDetail extends Component {
                     <Input usage="SGST" name="sgst" value={this.state.entry.sgst} onChange={this.handleChange} type="number"/>
                     <SubmitButton />
                 </form>
+                <DeleteButton onClick={this.deleteEntry} />
             </div>
         )
     }

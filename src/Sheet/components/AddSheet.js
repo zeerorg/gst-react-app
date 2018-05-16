@@ -39,9 +39,10 @@ export default class AddSheet extends Component {
   }
 
   render() {
+    let styleHeading = { "margin-left" : "5%" };
     return (
       <div className="AddSheet">
-        <h1> Add new Sheet </h1>
+        <h1 style={styleHeading}> Add new Sheet </h1>
         <form className="form-horizontal" onSubmit={this.handleSubmit}>
           <Input value={this.state.title} onChange={this.handleTitleChange} usage="Title" />
           <Input value={this.state.detail} onChange={this.handleDetailChange} usage="Details"/>

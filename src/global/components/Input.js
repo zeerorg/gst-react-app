@@ -13,9 +13,13 @@ export default class Input extends Component {
             type = this.props.type;
         if(this.props.extraClasses)
             extraClasses = this.props.extraClasses;
+
+        let style = {
+            "margin-top": "7%",
+            "margin-bottom": "7%"
+        }
         return (
-            <div className="TitleInput from-group">
-                <br />
+            <div className="TitleInput from-group" style={style}>
                 <label htmlFor={htmlFor} className="col-sm-2 control-label">{this.props.usage}</label>
                 <div className="col-sm-10">
                     <input 
@@ -28,7 +32,6 @@ export default class Input extends Component {
                         name={name}
                     />
                 </div>
-                <br />
             </div>
         )
     }

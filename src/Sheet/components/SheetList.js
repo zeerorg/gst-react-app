@@ -25,10 +25,13 @@ export default class SheetList extends Component {
    * @param {Array<Sheet>} sheets 
    */
   sheetList(sheets) {
+    let styleHeading = {
+      "margin-left": "4%"
+    }
     return (
       <div className="SheetList">
-        <h1>
-          Sheets &nbsp;&nbsp;&nbsp;
+        <h1 style={styleHeading}>
+          Sheets &nbsp;
           <LinkButton btnColor="btn-info" icon="glyphicon-plus" link="/sheet/new" />
         </h1>
         <br/>

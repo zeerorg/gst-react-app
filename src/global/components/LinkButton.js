@@ -4,15 +4,17 @@ import { Link } from 'react-router-dom';
 export default class Button extends Component {
 
     render() {
-        let btnClasses = "btn btn-lg " + this.props.btnColor;
+        let btnClasses = "btn btn-md " + this.props.btnColor;
         let icon = "glyphicon " + this.props.icon;
+        let style = {
+            "margin-left": "2%",
+            "margin-right": "2%",
+        }
         return (
-            <span>
-            &nbsp;
+            <span style={style}>
             <Link to={this.props.link} className={btnClasses}>
                 <span className={icon}></span>
             </Link>
-            &nbsp;
             </span>
         )
     }

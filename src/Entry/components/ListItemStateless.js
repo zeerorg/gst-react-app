@@ -1,12 +1,13 @@
 import React from 'react';
-import SmallLinkButton from '../../global/components/SmallLinkButton';
+import { Link } from 'react-router-dom';
 /**
  * Takes an entry and creates a table row from it.
  * editRedirect :- string, a link to redirect to when edit button is clicked.
  */
-const ListItem = ({ entry, editRedirect }) => {
+const ListItem = (props) => {
+  let { entry, editRedirect } = props;
   return (
-    <tr>
+    <tr class="ListItemStateless">
       <td>{entry.sr_no}</td>
       <td>{entry.type}</td>
       <td>{entry.gst_no}</td>
@@ -20,7 +21,7 @@ const ListItem = ({ entry, editRedirect }) => {
       <td>{entry.igst}</td>
       <td>{entry.cgst}</td>
       <td>{entry.sgst}</td>
-      <td><SmallLinkButton btnColor="btn-info" icon="glyphicon-pencil" link={editRedirect}/></td>
+      <td><Link to={editRedirect}>Edit</Link></td>
     </tr>
   )
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import EditSheetForm from './EditSheetForm';
+import Loader from "../../global/components/Loader/main"
 
 // eslint-disable-next-line
 import { withRouter } from 'react-router';
@@ -12,6 +13,8 @@ import { sheetsBackend } from '../sheet_backend';
  * When submit is clicked, upload the details.
  * Props required:
  * 1. `match.params.id` : string, the sheet id
+ * 
+ * TODO: Add cancel button
  */
 export default class EditSheet extends Component {
   constructor(props) {
@@ -38,7 +41,7 @@ export default class EditSheet extends Component {
   render() {
     let { fetched, title, details } = this.state;
 
-    if (!fetched) { return <h1> Loading </h1> }
+    if (!fetched) { return <Loader /> }
 
     return (
       <EditSheetForm 
