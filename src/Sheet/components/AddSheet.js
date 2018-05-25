@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+
 import { sheetsBackend } from '../sheet_backend';
 // eslint-disable-next-line
 import { withRouter } from 'react-router';
+
 import Input from '../../global/components/Input';
 import SubmitButton from '../../global/components/SubmitButton';
+import Form from '../../global/components/Form';
+import FormHeading from '../../global/components/FormHeading';
 
 /** Add sheet */
 export default class AddSheet extends Component {
@@ -39,15 +43,14 @@ export default class AddSheet extends Component {
   }
 
   render() {
-    let styleHeading = { "margin-left" : "5%" };
     return (
       <div className="AddSheet">
-        <h1 style={styleHeading}> Add new Sheet </h1>
-        <form className="form-horizontal" onSubmit={this.handleSubmit}>
+        <FormHeading>Add new Sheet </FormHeading>
+        <Form onSubmit={this.handleSubmit}>
           <Input value={this.state.title} onChange={this.handleTitleChange} usage="Title" />
           <Input value={this.state.detail} onChange={this.handleDetailChange} usage="Details"/>
           <SubmitButton />
-        </form>
+        </Form>
       </div>
     )
   }

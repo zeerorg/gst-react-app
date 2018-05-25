@@ -7,14 +7,14 @@ export default class Button extends Component {
         let btnClasses = "btn btn-md " + this.props.btnColor;
         let icon = "glyphicon " + this.props.icon;
         let style = {
-            "margin-left": "2%",
-            "margin-right": "2%",
+            "marginLeft": "2%",
+            "marginRight": "2%",
         }
         return (
             <span style={style}>
-            <Link to={this.props.link} className={btnClasses}>
-                <span className={icon}></span>
-            </Link>
+                <Link to={this.props.link} className={btnClasses}>
+                    <span className={icon}></span>
+                </Link>
             </span>
         )
     }

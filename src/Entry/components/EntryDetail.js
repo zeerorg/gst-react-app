@@ -8,11 +8,13 @@ import SubmitButton from '../../global/components/SubmitButton';
 import Loader from '../../global/components/Loader/main';
 import Input from '../../global/components/Input';
 import DeleteButton from '../../global/components/DeleteButton';
+import Form from '../../global/components/Form';
+import FormHeading from '../../global/components/FormHeading';
 
 import { entryBackend } from '../entry_backend';
 
 /**
- * Displays the entry details
+ * Displays the entry details in a form to be edited
  * Entry ID is retrieved from URL 
  */
 export default class EntryDetail extends Component {
@@ -79,27 +81,28 @@ export default class EntryDetail extends Component {
      * @param {Entry} entry
      */
     populateItem(entry) {
-        let styleHeading = { "margin-left": "5%" };
         return (
             <div className="EntryDetail">
-                <h1 style={styleHeading}>Entry for sheet</h1>
-                <form className="form-horizontal" onSubmit={this.handleSubmit}>
-                    <DateInput value={this.state.entry.inv_date.toDate()} onChange={this.handleDateChange} usage="Date" />
-                    <Input usage="Serial Number" name="sr_no" value={this.state.entry.sr_no} onChange={this.handleChange} />
-                    <Input usage="Type" name="type" value={this.state.entry.type} onChange={this.handleChange} />
-                    <Input usage="GST Number" name="gst_no" value={this.state.entry.gst_no} onChange={this.handleChange} />
-                    <Input usage="Invoice Number" name="inv_no" value={this.state.entry.inv_no} onChange={this.handleChange} />
-                    <Input usage="Invoice Type" name="inv_type" value={this.state.entry.inv_type} onChange={this.handleChange} />
-                    <Input usage="Invoice Value" name="inv_val" value={this.state.entry.inv_val} onChange={this.handleChange} type="number"/>
-                    <Input usage="POS" name="pos" value={this.state.entry.pos} onChange={this.handleChange} />
-                    <Input usage="Taxable Value" name="taxable_val" value={this.state.entry.taxable_val} onChange={this.handleChange} type="number"/>
-                    <Input usage="Rate" name="rate" value={this.state.entry.rate} onChange={this.handleChange} type="number"/>
-                    <Input usage="IGST" name="igst" value={this.state.entry.igst} onChange={this.handleChange} type="number"/>
-                    <Input usage="CGST" name="cgst" value={this.state.entry.cgst} onChange={this.handleChange} type="number"/>
-                    <Input usage="SGST" name="sgst" value={this.state.entry.sgst} onChange={this.handleChange} type="number"/>
-                    <SubmitButton />
-                </form>
-                <DeleteButton onClick={this.deleteEntry} />
+                <FormHeading>Edit entry {this.state.entry.sr_no}</FormHeading>
+                <div className="row">
+                    <Form onSubmit={this.handleSubmit}>
+                        <DateInput value={this.state.entry.inv_date.toDate()} onChange={this.handleDateChange} usage="Date" />
+                        <Input usage="Serial Number" name="sr_no" value={this.state.entry.sr_no} onChange={this.handleChange} />
+                        <Input usage="Type" name="type" value={this.state.entry.type} onChange={this.handleChange} />
+                        <Input usage="GST Number" name="gst_no" value={this.state.entry.gst_no} onChange={this.handleChange} />
+                        <Input usage="Invoice Number" name="inv_no" value={this.state.entry.inv_no} onChange={this.handleChange} />
+                        <Input usage="Invoice Type" name="inv_type" value={this.state.entry.inv_type} onChange={this.handleChange} />
+                        <Input usage="Invoice Value" name="inv_val" value={this.state.entry.inv_val} onChange={this.handleChange} type="number"/>
+                        <Input usage="POS" name="pos" value={this.state.entry.pos} onChange={this.handleChange} />
+                        <Input usage="Taxable Value" name="taxable_val" value={this.state.entry.taxable_val} onChange={this.handleChange} type="number"/>
+                        <Input usage="Rate" name="rate" value={this.state.entry.rate} onChange={this.handleChange} type="number"/>
+                        <Input usage="IGST" name="igst" value={this.state.entry.igst} onChange={this.handleChange} type="number"/>
+                        <Input usage="CGST" name="cgst" value={this.state.entry.cgst} onChange={this.handleChange} type="number"/>
+                        <Input usage="SGST" name="sgst" value={this.state.entry.sgst} onChange={this.handleChange} type="number"/>
+                        <SubmitButton />
+                        <DeleteButton onClick={this.deleteEntry} />
+                    </Form>
+                </div>
             </div>
         )
     }

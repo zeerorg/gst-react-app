@@ -7,12 +7,12 @@ import React from 'react';
  */
 const DeleteButton = (props) => {
     let style = {
-        "margin-top": "7%",
-        "margin-bottom": "7%"
+        "marginTop": "2vh",
+        "marginBottom": "2vh"
     }
     return (
-        <div className="DeleteButton" style={style}>
-            <div className="col-sm-offset-2 col-sm-10">
+        <div className="DeleteButton row" style={style}>
+            <div className="col-sm-offset-4 col-sm-5">
                 <button
                     type="button"
                     className="btn btn-default btn-danger btn-block"

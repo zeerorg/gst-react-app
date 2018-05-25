@@ -21,18 +21,18 @@ const SheetComponentPage = (props) => {
   let editSheetLink = `/sheet/${sheet.id}/edit`;
 
   let style = {
-    "margin-left": "4%"
+    "marginLeft": "4%"
   }
 
   let actionStyle = {
-    "margin-bottom": "4%",
-    "margin-left": "-2%"
+    "marginBottom": "4%",
+    "marginLeft": "-2%"
   }
   return (
     <div className="Sheet" style={style}>
       <h1>{sheet.title}</h1>
       <p>{sheet.details}</p>
-      <div class="sheet-actions" style={actionStyle}>
+      <div className="sheet-actions" style={actionStyle}>
         <LinkButton btnColor="btn-info" icon="glyphicon-plus" link={newEntryLink} />
         <Button btnColor="btn-danger" icon="glyphicon-remove" onClick={deleteHandler}/>
         <LinkButton btnColor="btn-warning" icon="glyphicon-edit" link={editSheetLink} />

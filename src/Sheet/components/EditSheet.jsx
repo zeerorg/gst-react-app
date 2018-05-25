@@ -28,6 +28,7 @@ export default class EditSheet extends Component {
   handleSubmit = event => {
     sheetsBackend.editSheet(this.sheet_id, this.state.title, this.state.details)
                  .then(() => this.props.history.goBack());
+    this.setState({...this.state, fetched: false});
     event.preventDefault();
   }
 

@@ -6,8 +6,8 @@ export default class Button extends Component {
         let classes = "btn btn-md " + this.props.btnColor;
         let icon = "glyphicon " + this.props.icon;
         let style = {
-            "margin-left": "2%",
-            "margin-right": "2%"
+            "marginLeft": "2%",
+            "marginRight": "2%"
         }
         return (
             <span style={style}>

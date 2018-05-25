@@ -15,13 +15,15 @@ export default class Input extends Component {
             extraClasses = this.props.extraClasses;
 
         let style = {
-            "margin-top": "7%",
-            "margin-bottom": "7%"
+            "marginTop": "2vh",
+            "marginBottom": "2vh",
+            "marginLeft": "15px",
+            "marginRight": "15px"
         }
         return (
-            <div className="TitleInput from-group" style={style}>
-                <label htmlFor={htmlFor} className="col-sm-2 control-label">{this.props.usage}</label>
-                <div className="col-sm-10">
+            <div className="TitleInput from-group row" style={style}>
+                <label htmlFor={htmlFor} className="col-sm-offset-2 col-sm-2 control-label">{this.props.usage}</label>
+                <div className="col-sm-5">
                     <input 
                         type={type} 
                         className={`form-control ${extraClasses}`}

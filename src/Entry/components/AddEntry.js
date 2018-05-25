@@ -9,6 +9,9 @@ import EntryHelper from '../entry_helper';
 import Input from '../../global/components/Input';
 import DateInput from '../../global/components/DateInput';
 import SubmitButton from '../../global/components/SubmitButton';
+import Form from '../../global/components/Form';
+import FormHeading from '../../global/components/FormHeading';
+import Loader from '../../global/components/Loader/main';
 
 /**
  *  To bo entered: serial number, gst number, invoice number, invoice date, pos, invoice value
@@ -26,7 +29,8 @@ export default class AddEntry extends Component {
           inv_no: '',
           pos: 'Delhi',
           tax_val: 0,
-          inv_date: new moment()
+          inv_date: new moment(),
+          sending: false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,8 +45,8 @@ export default class AddEntry extends Component {
     
       handleSubmit(event) {
         let entry = this.entryHelper.toEntryfromMinimal(this.sheet_id, this.state.sr_no, this.state.gst_no, this.state.inv_no, this.state.pos, this.state.tax_val, this.state.inv_date);
-        this.backend.addNewEntry(entry);
-        this.props.history.goBack();
+        this.backend.addNewEntry(entry).then(() => this.props.history.goBack());
+        this.setState({...this.state, sending: true})
         event.preventDefault();
       }
     
@@ -71,14 +75,13 @@ export default class AddEntry extends Component {
           this.setState({inv_date: moment(date)});
       }
 
-      render() {
-        let styleHeading = {
-          "margin-left": "4%"
-        }
+      render() {        
+        if(this.state.sending) { return <Loader /> }
+
         return (
           <div className="AddSheet">
-            <h1 style={styleHeading}> Add new Entry </h1>
-            <form className="form-horizontal" onSubmit={this.handleSubmit}>
+            <FormHeading>Add new Entry</FormHeading>
+            <Form onSubmit={this.handleSubmit}>
               <DateInput value={this.state.inv_date.toDate()} onChange={this.handleDateChange} usage="Date" />
               <Input value={this.state.sr_no} onChange={this.handleSerialChange} usage="Serial Number" />              
               <Input value={this.state.gst_no} onChange={this.handleGstChange} usage="GST Number" />
@@ -86,7 +89,7 @@ export default class AddEntry extends Component {
               <Input value={this.state.pos} onChange={this.handlePosChange} usage="POS"/>
               <Input type="number" value={this.state.tax_val} onChange={this.handleTaxValChange} usage="Taxable Value" />
               <SubmitButton />
-            </form>
+            </Form>
             <br/>
           </div>
         )

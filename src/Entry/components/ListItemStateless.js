@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const ListItem = (props) => {
   let { entry, editRedirect } = props;
   return (
-    <tr class="ListItemStateless">
+    <tr className="ListItemStateless">
       <td>{entry.sr_no}</td>
       <td>{entry.type}</td>
       <td>{entry.gst_no}</td>
