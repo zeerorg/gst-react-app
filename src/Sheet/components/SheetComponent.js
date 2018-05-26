@@ -23,12 +23,13 @@ export default class SheetComponent extends Component {
     this.sheetsData = sheetsBackend;
     this.deleteSheet = this.deleteSheet.bind(this);
 
-    this.state = { status: "fetching", sheet: null, total: null,  }
+    this.startState = { status: "fetching", sheet: null, total: null, delete: {flag: false, inprocess: false} };
+    this.state = this.startState
   }
 
-  async deleteSheet() {
-    await this.sheetsData.deleteSheet(this.id, this.state.sheet.entries);
-    this.props.history.goBack();
+  deleteSheet(sheet_id, entries) {
+    this.sheetsData.deleteSheet(sheet_id, entries).then(() => this.props.history.goBack());
+    this.setState({ ...this.state, delete : { inprocess: true }})
   }
 
   async downloadSheet(entries, title, total) {
@@ -56,6 +57,18 @@ export default class SheetComponent extends Component {
   }
 
   render() {
+    if (this.state.delete.inprocess) {
+      return <Loader />
+    }
+
+    if (this.state.delete.flag) { 
+      return (
+        <React.Fragment>
+          <button onClick={() => this.deleteSheet(this.state.delete.id, this.state.delete.entries)}>Yes</button>
+          <button onClick={() => this.setState(this.startState)}>No</button>
+        </React.Fragment>
+      )
+     }
     return (
       <AsyncLoad promise={sheetsBackend.getSheetDetail(this.id)} LoadComponent={Loader}>
         {(sheet, error) =>
@@ -68,7 +81,7 @@ export default class SheetComponent extends Component {
                 entries={sortedEntries}
                 total={total}
                 downloadHandler={() => this.downloadSheet(entries, sheet.title, total)}
-                deleteHandler={() => {}}
+                deleteHandler={() => this.setState({ ...this.state, delete: { flag: true, id: sheet.id, entries } })}
               />              
             }}
           </AsyncLoad>
