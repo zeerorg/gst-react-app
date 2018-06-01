@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FileSaver from 'file-saver';
 // eslint-disable-next-line
 import { withRouter } from 'react-router';
 
@@ -9,6 +8,8 @@ import SheetComponentPage from './SheetComponentPage';
 
 import { sheetsBackend } from '../sheet_backend';
 import { entryBackend } from '../../Entry/entry_backend';
+
+import * as xlsx from 'xlsx';
 
 /**
  * Takes a sheet id from the url and fetches the sheet from firebase.
@@ -32,13 +33,22 @@ export default class SheetComponent extends Component {
     this.setState({ ...this.state, delete : { inprocess: true }})
   }
 
-  async downloadSheet(entries, title, total) {
+  async downloadXLSX(entries, title, total) {
     let data = "sno,type,gst no,invoice no,invoice date,invoice type,pos,invoice value,taxable value,rate,igst,cgst,sgst";
-    for (let curr of entries.sort((a, b) => a.inv_date > b.inv_date)) {
-      data = `${data}\n${curr.sr_no},${curr.type},${curr.gst_no},${curr.inv_no},${curr.getDate()},${curr.inv_type},${curr.pos},${curr.inv_val},${curr.taxable_val},${curr.rate},${curr.igst},${curr.cgst},${curr.sgst}`
+    data = [data.split(",")];
+    for (let entry of entries) {
+      const entryKeys = ["sr_no", "type", "gst_no", "inv_no", "inv_date", "inv_type", "inv_val", "pos", "taxable_val", "rate", "igst", "cgst", "sgst"];
+      data.push(Array.from(entryKeys.map(key => entry[key])));
     }
-    data = `${data}\ntotal,invoice value,taxable value,igst,cgst,sgst\ntotal,${total.inv_val},${total.taxable_val},${total.igst},${total.cgst},${total.sgst}`;
-    FileSaver.saveAs(new Blob([data], {type: "text/csv;charset=utf-8"}), `${title}.csv`);
+    data.push([])
+    data.push(["Invoice Value", "Taxable Value", "IGST", "CGST", "SGST"])
+    data.push(["inv_val", "taxable_val", "igst", "cgst", "sgst"].map(key => total[key]))
+
+    let ws_name = title;
+    let wb = xlsx.utils.book_new();
+    let ws = xlsx.utils.aoa_to_sheet(data);
+    xlsx.utils.book_append_sheet(wb, ws, ws_name);
+    xlsx.writeFile(wb, `${title}.xlsx`);
   }
   
 
@@ -53,7 +63,7 @@ export default class SheetComponent extends Component {
   }
 
   sortEntries(entries) {
-    return entries.sort((a, b) => a.inv_date > b.inv_date)
+    return entries.sort((a, b) => Number(a.sr_no) > Number(b.sr_no))
   }
 
   render() {
@@ -76,11 +86,12 @@ export default class SheetComponent extends Component {
             {(entries, error) => {
               let total = this.getTotal(entries);
               let sortedEntries = this.sortEntries(entries);
+              // console.log(entries);
               return <SheetComponentPage
                 sheet={sheet}
                 entries={sortedEntries}
                 total={total}
-                downloadHandler={() => this.downloadSheet(entries, sheet.title, total)}
+                downloadHandler={() => this.downloadXLSX(entries, sheet.title, total)}
                 deleteHandler={() => this.setState({ ...this.state, delete: { flag: true, id: sheet.id, entries } })}
               />              
             }}
